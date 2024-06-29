@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef, useLayoutEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { atomDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
@@ -7,12 +7,13 @@ import { FaPaperPlane } from 'react-icons/fa';
 const ChatWindow = ({ name, messages, onRemove, webAccess, toggleWebAccess, onSendMessage }) => {
   const [input, setInput] = useState('');
   const messagesEndRef = useRef(null);
+  const chatMessagesRef = useRef(null);
 
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  };
-
-  useEffect(scrollToBottom, [messages]);
+  useLayoutEffect(() => {
+    if (chatMessagesRef.current) {
+      chatMessagesRef.current.scrollTop = chatMessagesRef.current.scrollHeight;
+    }
+  }, [messages]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -39,7 +40,7 @@ const ChatWindow = ({ name, messages, onRemove, webAccess, toggleWebAccess, onSe
           <button onClick={onRemove} className="remove-btn">×</button>
         </div>
       </div>
-      <div className="chat-messages">
+      <div className="chat-messages" ref={chatMessagesRef}>
         {messages.map((message, index) => (
           <div key={index} className={`message ${message.sender}`}>
             <ReactMarkdown

@@ -9,6 +9,20 @@ import { allModels } from './utils/modelData';
 
 const App = () => {
   const [layout, setLayout] = useState(3);
+  const [scrollPosition, setScrollPosition] = useState(0);
+
+  React.useEffect(() => {
+    const handleScroll = () => {
+      const position = window.pageYOffset;
+      setScrollPosition(position);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
   const [selectedModels, setSelectedModels] = useState(
     allModels.slice(0, 2).map(model => ({
       ...model,
@@ -34,6 +48,9 @@ const App = () => {
 
   return (
     <div className="app">
+      <div className={`title-bar ${scrollPosition > 0 ? 'sticky' : ''}`}>
+        <h1>🤖 Chat Playground 💬</h1>
+      </div>
       <div 
         className="chat-grid"
         style={{
