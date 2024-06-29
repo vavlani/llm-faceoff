@@ -3,7 +3,7 @@ import './App.css';
 import ChatWindow from './components/ChatWindow';
 import ModelSelector from './components/ModelSelector';
 import CommonInput from './components/CommonInput';
-import { removeWindow, toggleWebAccess, sendMessage } from './utils/chatUtils';
+import { removeWindow, toggleWebAccess, sendMessage, updateSelectedModels } from './utils/chatUtils';
 import { allModels } from './utils/modelData';
 
 const App = () => {
@@ -28,6 +28,10 @@ const App = () => {
       webAccess: false
     }))
   );
+
+  const updateModels = (updatedModels) => {
+    setSelectedModels(updatedModels);
+  };
   const [input, setInput] = useState('');
 
   const handleSubmit = (e) => {
@@ -55,10 +59,10 @@ const App = () => {
             key={index}
             name={model.label}
             messages={model.messages}
-            onRemove={() => removeWindow(model)}
+            onRemove={() => removeWindow(model, selectedModels, updateModels)}
             webAccess={model.webAccess}
-            toggleWebAccess={() => toggleWebAccess(model)}
-            onSendMessage={(message) => sendMessage(model, message)}
+            toggleWebAccess={() => toggleWebAccess(model, selectedModels, updateModels)}
+            onSendMessage={(message) => sendMessage(model, message, selectedModels, updateModels)}
           />
         ))}
       </div>
