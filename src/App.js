@@ -75,7 +75,7 @@ const App = () => {
   return (
     <div className="app">
       <div className={`title-bar ${scrollPosition > 0 ? 'sticky' : ''}`}>
-        <h1>🤖 Chat Playground 💬</h1>
+        <h1>Chat Playground</h1>
       </div>
       <div className="chat-grid">
         {selectedModels.map((model, index) => (
