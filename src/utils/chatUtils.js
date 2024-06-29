@@ -11,10 +11,15 @@ export const toggleWebAccess = (modelToToggle, selectedModels, updateModels) => 
 };
 
 export const sendMessage = (modelToUpdate, message, selectedModels, updateModels) => {
-  const newMessage = { text: message, sender: 'user' };
-  const aiResponse = { text: `You said: ${message}`, sender: 'ai' };
   const updatedModels = selectedModels.map(model => 
-    model.value === modelToUpdate.value ? {...model, messages: [...model.messages, newMessage, aiResponse]} : model
+    model.value === modelToUpdate.value ? {
+      ...model, 
+      messages: [
+        ...model.messages, 
+        { text: message, sender: 'user' },
+        { text: `You said: ${message}`, sender: 'ai' }
+      ]
+    } : model
   );
   updateModels(updatedModels);
 };

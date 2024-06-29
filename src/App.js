@@ -40,9 +40,15 @@ const App = () => {
   const handleCommonSubmit = (e) => {
     e.preventDefault();
     if (commonInput.trim()) {
-      selectedModels.forEach(model => {
-        sendMessage(model, commonInput, selectedModels, updateModels);
-      });
+      const updatedModels = selectedModels.map(model => ({
+        ...model,
+        messages: [
+          ...model.messages,
+          { text: commonInput, sender: 'user' },
+          { text: `You said: ${commonInput}`, sender: 'ai' }
+        ]
+      }));
+      updateModels(updatedModels);
       setCommonInput('');
     }
   };
