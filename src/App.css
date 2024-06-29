@@ -1,8 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
+
 body, html {
   margin: 0;
   padding: 0;
   height: 100%;
-  font-family: Arial, sans-serif;
+  font-family: 'Nunito', sans-serif;
   font-size: 14px;
 }
 
@@ -20,7 +22,7 @@ body, html {
   top: 0;
   left: 0;
   right: 0;
-  background-color: #2c5e2e;
+  background-color: #8B4513;
   padding: 10px 20px;
   z-index: 1000;
   transition: box-shadow 0.3s ease;
@@ -34,8 +36,12 @@ body, html {
   margin: 0;
   font-size: 20px;
   text-align: left;
-  color: #e0e0e0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #FFF8DC;
+  font-family: 'Nunito', sans-serif;
+  display: inline-block;
+  background-color: #A0522D;
+  padding: 5px 15px;
+  border-radius: 20px;
 }
 
 .chat-grid {
@@ -179,8 +185,8 @@ input:checked + .slider:before {
 
 .chat-input button {
   padding: 8px 12px;
-  background-color: #2c5e2e;
-  color: #e0e0e0;
+  background-color: #8B4513;
+  color: #FFF8DC;
   border: none;
   border-radius: 16px;
   margin-left: 10px;
@@ -267,8 +273,8 @@ input:checked + .slider:before {
 }
 
 .common-input .send-button {
-  background-color: #2c5e2e;
-  color: #e0e0e0;
+  background-color: #8B4513;
+  color: #FFF8DC;
 }
 
 /* Markdown styles */
@@ -291,8 +297,8 @@ input:checked + .slider:before {
 }
 
 .chat-controls button {
-  background-color: #2c5e2e;
-  color: #e0e0e0;
+  background-color: #8B4513;
+  color: #FFF8DC;
   border: none;
   border-radius: 50%;
   width: 36px;
@@ -306,7 +312,7 @@ input:checked + .slider:before {
 }
 
 .chat-controls button:hover:not(:disabled) {
-  background-color: #3a7a3c;
+  background-color: #A0522D;
   transform: scale(1.05);
 }
 
@@ -318,7 +324,7 @@ input:checked + .slider:before {
 .chat-controls span {
   font-size: 20px;
   font-weight: bold;
-  color: #2c5e2e;
+  color: #8B4513;
   margin: 0 10px;
 }
 /* React-Select custom styles */
