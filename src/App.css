@@ -251,3 +251,37 @@ input:checked + .slider:before {
   font-family: 'Courier New', Courier, monospace;
   font-size: 11px;
 }
+.chat-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.chat-controls button {
+  background-color: #4a4a4a;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.chat-controls button:hover:not(:disabled) {
+  background-color: #5a5a5a;
+}
+
+.chat-controls button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.chat-controls span {
+  font-size: 18px;
+  font-weight: bold;
+}

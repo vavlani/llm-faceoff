@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import ChatWindow from './components/ChatWindow';
-import ModelSelector from './components/ModelSelector';
-import CommonInput from './components/CommonInput';
-import { removeWindow, toggleWebAccess, sendMessage, updateSelectedModels, changeModel } from './utils/chatUtils';
+import { FaPlus, FaMinus } from 'react-icons/fa';
+import { removeWindow, toggleWebAccess, sendMessage, changeModel } from './utils/chatUtils';
 import { allModels } from './utils/modelData';
 
 const App = () => {
@@ -32,23 +31,28 @@ const App = () => {
   const updateModels = (updatedModels) => {
     setSelectedModels(updatedModels);
   };
-  const [input, setInput] = useState('');
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (input.trim()) {
-      const newMessage = { text: input, sender: 'user' };
-      const aiResponse = { text: `You said: ${input}`, sender: 'ai' };
-      setSelectedModels(prevModels => prevModels.map(model => ({
-        ...model,
-        messages: [...model.messages, newMessage, aiResponse]
-      })));
-      setInput('');
-    }
-  };
 
   const handleModelChange = (modelToChange, newModelValue) => {
     changeModel(modelToChange, newModelValue, selectedModels, allModels, updateModels);
+  };
+
+  const addChatWindow = () => {
+    if (selectedModels.length < 6) {
+      const newModel = allModels.find(model => !selectedModels.some(m => m.value === model.value));
+      if (newModel) {
+        setSelectedModels([...selectedModels, {
+          ...newModel,
+          messages: [{ text: newModel.initialMessage, sender: 'ai' }],
+          webAccess: false
+        }]);
+      }
+    }
+  };
+
+  const removeChatWindow = () => {
+    if (selectedModels.length > 1) {
+      setSelectedModels(selectedModels.slice(0, -1));
+    }
   };
 
   return (
@@ -72,8 +76,15 @@ const App = () => {
         ))}
       </div>
       <div className="bottom-bar">
-        <ModelSelector selectedModels={selectedModels} setSelectedModels={setSelectedModels} />
-        <CommonInput input={input} setInput={setInput} handleSubmit={handleSubmit} />
+        <div className="chat-controls">
+          <button onClick={removeChatWindow} disabled={selectedModels.length <= 1}>
+            <FaMinus />
+          </button>
+          <span>{selectedModels.length}</span>
+          <button onClick={addChatWindow} disabled={selectedModels.length >= 6}>
+            <FaPlus />
+          </button>
+        </div>
       </div>
     </div>
   );
