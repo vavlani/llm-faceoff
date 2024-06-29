@@ -347,3 +347,8 @@ input:checked + .slider:before {
   cursor: pointer;
   padding: 8px 12px !important;
 }
+
+.react-select__single-value {
+  font-size: 12px;
+  font-weight: 600;
+}
