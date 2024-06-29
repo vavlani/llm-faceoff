@@ -41,6 +41,7 @@ body, html {
   gap: 20px;
   flex-grow: 1;
   margin-bottom: 60px; /* Space for the bottom bar */
+  grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
 }
 
 .chat-window {

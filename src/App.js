@@ -51,12 +51,7 @@ const App = () => {
       <div className={`title-bar ${scrollPosition > 0 ? 'sticky' : ''}`}>
         <h1>🤖 Chat Playground 💬</h1>
       </div>
-      <div 
-        className="chat-grid"
-        style={{
-          gridTemplateColumns: `repeat(${layout}, 1fr)`,
-        }}
-      >
+      <div className="chat-grid">
         {selectedModels.map((model, index) => (
           <ChatWindow 
             key={index}
