@@ -1,17 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import ChatWindow from './components/ChatWindow';
-import LayoutControls from './components/LayoutControls';
 import ModelSelector from './components/ModelSelector';
 import CommonInput from './components/CommonInput';
 import { removeWindow, toggleWebAccess, sendMessage } from './utils/chatUtils';
 import { allModels } from './utils/modelData';
 
 const App = () => {
-  const [layout, setLayout] = useState(3);
   const [scrollPosition, setScrollPosition] = useState(0);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const handleScroll = () => {
       const position = window.pageYOffset;
       setScrollPosition(position);
@@ -65,7 +63,6 @@ const App = () => {
         ))}
       </div>
       <div className="bottom-bar">
-        <LayoutControls layout={layout} setLayout={setLayout} />
         <ModelSelector selectedModels={selectedModels} setSelectedModels={setSelectedModels} />
         <CommonInput input={input} setInput={setInput} handleSubmit={handleSubmit} />
       </div>
