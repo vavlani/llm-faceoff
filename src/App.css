@@ -364,7 +364,7 @@ input:checked + .slider:before {
 .react-select__single-value {
   font-size: 14px;
   font-weight: bold;
-  color: #FFF8DC !important;
+  color: black !important;
   font-family: 'Nunito', sans-serif;
 }
 
