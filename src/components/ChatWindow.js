@@ -44,7 +44,7 @@ const ChatWindow = ({ model, availableModels, messages, onRemove, webAccess, tog
             }),
             singleValue: (provided) => ({
               ...provided,
-              color: '#444',
+              color: '#000',
               fontFamily: "'Nunito', sans-serif",
               fontWeight: 'bold',
             }),
