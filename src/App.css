@@ -388,5 +388,5 @@ input:checked + .slider:before {
 }
 
 .react-select__indicator {
-  color: #FFF8DC !important;
+  color: #8B4513 !important;
 }
