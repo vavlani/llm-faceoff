@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import ChatWindow from './components/ChatWindow';
-import { FaPlus, FaMinus } from 'react-icons/fa';
+import { FaPlus, FaMinus, FaPaperPlane } from 'react-icons/fa';
 import { removeWindow, toggleWebAccess, sendMessage, changeModel } from './utils/chatUtils';
 import { allModels } from './utils/modelData';
 
@@ -27,6 +27,7 @@ const App = () => {
       webAccess: false
     }))
   );
+  const [commonInput, setCommonInput] = useState('');
 
   const updateModels = (updatedModels) => {
     setSelectedModels(updatedModels);
@@ -34,6 +35,16 @@ const App = () => {
 
   const handleModelChange = (modelToChange, newModelValue) => {
     changeModel(modelToChange, newModelValue, selectedModels, allModels, updateModels);
+  };
+
+  const handleCommonSubmit = (e) => {
+    e.preventDefault();
+    if (commonInput.trim()) {
+      selectedModels.forEach(model => {
+        sendMessage(model, commonInput, selectedModels, updateModels);
+      });
+      setCommonInput('');
+    }
   };
 
   const addChatWindow = () => {
@@ -85,6 +96,17 @@ const App = () => {
             <FaPlus />
           </button>
         </div>
+        <form onSubmit={handleCommonSubmit} className="common-input">
+          <input
+            type="text"
+            value={commonInput}
+            onChange={(e) => setCommonInput(e.target.value)}
+            placeholder="Type a message to send to all models..."
+          />
+          <button type="submit" className="send-button">
+            <FaPaperPlane />
+          </button>
+        </form>
       </div>
     </div>
   );
