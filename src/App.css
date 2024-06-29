@@ -201,7 +201,7 @@ input:checked + .slider:before {
 
 
 .basic-multi-select {
-  width: 250px;
+  width: 400px;
   margin-right: 20px;
 }
 
@@ -223,10 +223,20 @@ input:checked + .slider:before {
   background-color: #2196F3;
   color: white;
   border: none;
-  border-radius: 16px;
+  border-radius: 50%;
   margin-left: 10px;
   cursor: pointer;
   font-size: 12px;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.common-input .send-button {
+  background-color: #2196F3;
+  color: white;
 }
 
 /* Markdown styles */
