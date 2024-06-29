@@ -94,13 +94,15 @@ const App = () => {
       </div>
       <div className="bottom-bar">
         <div className="chat-controls">
-          <button onClick={removeChatWindow} disabled={selectedModels.length <= 1}>
-            <FaMinus />
-          </button>
-          <span>{selectedModels.length}</span>
-          <button onClick={addChatWindow} disabled={selectedModels.length >= 6}>
-            <FaPlus />
-          </button>
+          <div className="counter-widget">
+            <button onClick={removeChatWindow} disabled={selectedModels.length <= 1}>
+              <FaMinus />
+            </button>
+            <span>{selectedModels.length}</span>
+            <button onClick={addChatWindow} disabled={selectedModels.length >= 6}>
+              <FaPlus />
+            </button>
+          </div>
         </div>
         <form onSubmit={handleCommonSubmit} className="common-input">
           <input
