@@ -3,6 +3,7 @@ import ReactMarkdown from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { atomDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { FaPaperPlane } from 'react-icons/fa';
+import Select from 'react-select';
 
 const ChatWindow = ({ model, availableModels, messages, onRemove, webAccess, toggleWebAccess, onSendMessage, onModelChange }) => {
   const [input, setInput] = useState('');
@@ -26,17 +27,28 @@ const ChatWindow = ({ model, availableModels, messages, onRemove, webAccess, tog
   return (
     <div className="chat-window">
       <div className="chat-header">
-        <select
-          value={model.value}
-          onChange={(e) => onModelChange(e.target.value)}
+        <Select
+          value={availableModels.find(m => m.value === model.value)}
+          onChange={(selectedOption) => onModelChange(selectedOption.value)}
+          options={availableModels}
           className="model-selector"
-        >
-          {availableModels.map((availableModel) => (
-            <option key={availableModel.value} value={availableModel.value}>
-              {availableModel.label}
-            </option>
-          ))}
-        </select>
+          classNamePrefix="react-select"
+          isSearchable={false}
+          styles={{
+            control: (provided) => ({
+              ...provided,
+              backgroundColor: '#f0f0f0',
+              border: 'none',
+              boxShadow: 'none',
+              cursor: 'pointer',
+            }),
+            option: (provided, state) => ({
+              ...provided,
+              backgroundColor: state.isSelected ? '#007bff' : state.isFocused ? '#e6f2ff' : 'white',
+              color: state.isSelected ? 'white' : 'black',
+            }),
+          }}
+        />
         <div className="header-controls">
           <label className="web-access-toggle">
             <input
