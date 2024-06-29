@@ -22,3 +22,11 @@ export const sendMessage = (modelToUpdate, message, selectedModels, updateModels
 export const updateSelectedModels = (updatedModels, updateModels) => {
   updateModels(updatedModels);
 };
+
+export const changeModel = (modelToChange, newModelValue, selectedModels, availableModels, updateModels) => {
+  const newModel = availableModels.find(model => model.value === newModelValue);
+  const updatedModels = selectedModels.map(model => 
+    model.value === modelToChange.value ? {...newModel, messages: model.messages, webAccess: model.webAccess} : model
+  );
+  updateModels(updatedModels);
+};

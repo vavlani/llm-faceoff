@@ -4,7 +4,7 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { atomDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { FaPaperPlane } from 'react-icons/fa';
 
-const ChatWindow = ({ name, messages, onRemove, webAccess, toggleWebAccess, onSendMessage }) => {
+const ChatWindow = ({ model, availableModels, messages, onRemove, webAccess, toggleWebAccess, onSendMessage, onModelChange }) => {
   const [input, setInput] = useState('');
   const messagesEndRef = useRef(null);
   const chatMessagesRef = useRef(null);
@@ -26,7 +26,17 @@ const ChatWindow = ({ name, messages, onRemove, webAccess, toggleWebAccess, onSe
   return (
     <div className="chat-window">
       <div className="chat-header">
-        <h3>{name}</h3>
+        <select
+          value={model.value}
+          onChange={(e) => onModelChange(e.target.value)}
+          className="model-selector"
+        >
+          {availableModels.map((availableModel) => (
+            <option key={availableModel.value} value={availableModel.value}>
+              {availableModel.label}
+            </option>
+          ))}
+        </select>
         <div className="header-controls">
           <label className="web-access-toggle">
             <input
