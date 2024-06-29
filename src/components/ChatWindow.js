@@ -37,15 +37,22 @@ const ChatWindow = ({ model, availableModels, messages, onRemove, webAccess, tog
           styles={{
             control: (provided) => ({
               ...provided,
-              backgroundColor: '#f0f0f0',
+              backgroundColor: '#A0522D',
               border: 'none',
               boxShadow: 'none',
               cursor: 'pointer',
             }),
+            singleValue: (provided) => ({
+              ...provided,
+              color: '#FFF8DC',
+              fontFamily: "'Nunito', sans-serif",
+              fontWeight: 'bold',
+            }),
             option: (provided, state) => ({
               ...provided,
-              backgroundColor: state.isSelected ? '#007bff' : state.isFocused ? '#e6f2ff' : 'white',
-              color: state.isSelected ? 'white' : 'black',
+              backgroundColor: state.isSelected ? '#8B4513' : state.isFocused ? '#D2691E' : 'white',
+              color: state.isSelected || state.isFocused ? '#FFF8DC' : 'black',
+              fontFamily: "'Nunito', sans-serif",
             }),
           }}
         />

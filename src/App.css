@@ -347,6 +347,7 @@ input:checked + .slider:before {
 
 .react-select__dropdown-indicator {
   padding: 0 8px !important;
+  color: #FFF8DC !important;
 }
 
 .react-select__menu {
@@ -361,6 +362,12 @@ input:checked + .slider:before {
 }
 
 .react-select__single-value {
-  font-size: 12px;
-  font-weight: 600;
+  font-size: 14px;
+  font-weight: bold;
+  color: #FFF8DC !important;
+  font-family: 'Nunito', sans-serif;
+}
+
+.react-select__indicator {
+  color: #FFF8DC !important;
 }
