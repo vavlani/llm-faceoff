@@ -3,7 +3,7 @@ import './App.css';
 import ChatWindow from './components/ChatWindow';
 import ModelSelector from './components/ModelSelector';
 import CommonInput from './components/CommonInput';
-import { removeWindow, toggleWebAccess, sendMessage, updateSelectedModels } from './utils/chatUtils';
+import { removeWindow, toggleWebAccess, sendMessage, updateSelectedModels, changeModel } from './utils/chatUtils';
 import { allModels } from './utils/modelData';
 
 const App = () => {
@@ -47,6 +47,9 @@ const App = () => {
     }
   };
 
+  const handleModelChange = (modelToChange, newModelValue) => {
+    changeModel(modelToChange, newModelValue, selectedModels, allModels, updateModels);
+  };
 
   return (
     <div className="app">
@@ -57,12 +60,14 @@ const App = () => {
         {selectedModels.map((model, index) => (
           <ChatWindow 
             key={index}
-            name={model.label}
+            model={model}
+            availableModels={allModels}
             messages={model.messages}
             onRemove={() => removeWindow(model, selectedModels, updateModels)}
             webAccess={model.webAccess}
             toggleWebAccess={() => toggleWebAccess(model, selectedModels, updateModels)}
             onSendMessage={(message) => sendMessage(model, message, selectedModels, updateModels)}
+            onModelChange={(newModelValue) => handleModelChange(model, newModelValue)}
           />
         ))}
       </div>
