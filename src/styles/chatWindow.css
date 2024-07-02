@@ -33,6 +33,40 @@
   font-size: 14px;
 }
 
+.chat-subheader {
+  background-color: #f0f0f0;
+  padding: 5px 15px;
+  font-size: 12px;
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.3s ease-out;
+}
+
+.chat-subheader.open {
+  max-height: 50px;
+  transition: max-height 0.3s ease-in;
+}
+
+.api-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.api-info span {
+  margin-right: 10px;
+}
+
+.subheader-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--text-color);
+  padding: 0;
+  margin-left: 5px;
+}
+
 .chat-messages {
   flex-grow: 1;
   overflow-y: auto;
