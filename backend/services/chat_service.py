@@ -1,8 +1,9 @@
 import os
 from dotenv import load_dotenv
-from langchain.chat_models import ChatOpenAI, ChatAnthropic
-from langchain.schema import HumanMessage, AIMessage, SystemMessage
-from langchain_community.callbacks import get_openai_callback, get_anthropic_callback
+from langchain_openai import ChatOpenAI
+from langchain_anthropic import ChatAnthropic
+from langchain_core.messages import HumanMessage, AIMessage, SystemMessage
+from langchain_community.callbacks import get_openai_callback
 
 # Load environment variables
 load_dotenv()
@@ -58,22 +59,29 @@ def process_message(messages, model_name):
             langchain_messages.append(AIMessage(content=msg['content']))
 
     # Process the message and get the response
-    callback = get_openai_callback() if model_name.startswith("gpt-") else get_anthropic_callback()
-    
-    with callback() as cb:
+    if model_name.startswith("gpt-"):
+        with get_openai_callback() as cb:
+            response = model(langchain_messages)
+    else:
         response = model(langchain_messages)
+        cb = None
 
     # Prepare the result
     result = {
         "response": response.content,
         "model_name": model_name,
-        "usage": {
+    }
+    
+    if cb:
+        result["usage"] = {
             "input_tokens": cb.prompt_tokens,
             "output_tokens": cb.completion_tokens,
             "total_tokens": cb.total_tokens
-        },
-        "cost": cb.total_cost
-    }
+        }
+        result["cost"] = cb.total_cost
+    else:
+        result["usage"] = "Not available for this model"
+        result["cost"] = "Not available for this model"
 
     return result
 
