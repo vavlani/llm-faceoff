@@ -1,3 +1,4 @@
+// Import necessary dependencies and components
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import ChatWindow from './components/ChatWindow';
@@ -9,10 +10,12 @@ import { allModels } from './utils/modelData';
 import { initialSettings, applySettings } from './utils/settingsUtils';
 
 const App = () => {
+  // State variables
   const [scrollPosition, setScrollPosition] = useState(0);
   const [settings, setSettings] = useState(initialSettings);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
+  // Effect to handle scroll position for sticky header
   useEffect(() => {
     const handleScroll = () => {
       const position = window.pageYOffset;
@@ -26,14 +29,17 @@ const App = () => {
     };
   }, []);
 
+  // Effect to apply settings when they change
   useEffect(() => {
     applySettings(settings);
   }, [settings]);
 
+  // Toggle settings panel
   const toggleSettings = () => {
     setIsSettingsOpen(!isSettingsOpen);
   };
 
+  // Update a specific setting
   const updateSetting = (key, value) => {
     setSettings(prevSettings => {
       const newSettings = { ...prevSettings, [key]: value };
@@ -42,12 +48,14 @@ const App = () => {
     });
   };
 
+  // Load saved settings from localStorage on initial render
   useEffect(() => {
     const savedSettings = localStorage.getItem('chatPlaygroundSettings');
     if (savedSettings) {
       setSettings(JSON.parse(savedSettings));
     }
   }, []);
+  // State for selected models and common input
   const [selectedModels, setSelectedModels] = useState(
     allModels.slice(0, 2).map(model => ({
       ...model,
@@ -57,14 +65,17 @@ const App = () => {
   );
   const [commonInput, setCommonInput] = useState('');
 
+  // Function to update models
   const updateModels = (updatedModels) => {
     setSelectedModels(updatedModels);
   };
 
+  // Handle model change
   const handleModelChange = (modelToChange, newModelValue) => {
     changeModel(modelToChange, newModelValue, selectedModels, allModels, updateModels);
   };
 
+  // Handle submission of common input
   const handleCommonSubmit = (e) => {
     e.preventDefault();
     if (commonInput.trim()) {
@@ -81,6 +92,7 @@ const App = () => {
     }
   };
 
+  // Add a new chat window
   const addChatWindow = () => {
     if (selectedModels.length < 6) {
       const newModel = allModels.find(model => !selectedModels.some(m => m.value === model.value));
@@ -94,22 +106,26 @@ const App = () => {
     }
   };
 
+  // Remove the last chat window
   const removeChatWindow = () => {
     if (selectedModels.length > 1) {
       setSelectedModels(selectedModels.slice(0, -1));
     }
   };
 
+  // Copy common input to all chat windows
   const handleCopy = () => {
     copyToAllInputs(commonInput, selectedModels, updateModels);
   };
 
+  // Send messages from individual inputs
   const handleSendIndividual = () => {
     sendFromIndividualInputs(selectedModels, updateModels);
   };
 
   return (
     <div className="app">
+      {/* Title bar with sticky behavior based on scroll position */}
       <div className={`title-bar ${scrollPosition > 0 ? 'sticky' : ''}`}>
         <h1><FaComments className="title-icon" /> Chat Playground</h1>
         <Settings
@@ -119,6 +135,7 @@ const App = () => {
           updateSetting={updateSetting}
         />
       </div>
+      {/* Grid of chat windows */}
       <div className="chat-grid">
         {selectedModels.map((model, index) => (
           <ChatWindow 
@@ -136,6 +153,7 @@ const App = () => {
           />
         ))}
       </div>
+      {/* Bottom bar with chat controls and common input */}
       <div className="bottom-bar">
         <div className="chat-controls">
           <div className="counter-widget">
