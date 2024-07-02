@@ -27,8 +27,8 @@
 
 .common-input button {
   padding: 8px 12px;
-  background-color: #2196F3;
-  color: white;
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
   border: none;
   border-radius: 50%;
   margin-left: 10px;
@@ -39,9 +39,20 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.common-input button:hover {
+  background-color: var(--primary-color);
+  color: var(--background-color);
 }
 
 .common-input .send-button {
   background-color: var(--primary-color);
   color: var(--background-color);
+}
+
+.common-input .send-button:hover {
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
 }
