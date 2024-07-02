@@ -111,10 +111,14 @@ input:checked + .slider:before {
 .counter-buttons button {
   background: none;
   border: none;
-  font-size: 18px;
+  font-size: 16px;
   cursor: pointer;
   color: white;
   padding: 0 5px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .counter-buttons span {
