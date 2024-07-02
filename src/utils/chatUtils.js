@@ -35,3 +35,29 @@ export const changeModel = (modelToChange, newModelValue, selectedModels, availa
   );
   updateModels(updatedModels);
 };
+
+export const copyToAllInputs = (input, selectedModels, updateModels) => {
+  const updatedModels = selectedModels.map(model => ({
+    ...model,
+    currentInput: input
+  }));
+  updateModels(updatedModels);
+};
+
+export const sendFromIndividualInputs = (selectedModels, updateModels) => {
+  const updatedModels = selectedModels.map(model => {
+    if (model.currentInput && model.currentInput.trim()) {
+      return {
+        ...model,
+        messages: [
+          ...model.messages,
+          { text: model.currentInput, sender: 'user' },
+          { text: `You said: ${model.currentInput}`, sender: 'ai' }
+        ],
+        currentInput: ''
+      };
+    }
+    return model;
+  });
+  updateModels(updatedModels);
+};

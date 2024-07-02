@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import ChatWindow from './components/ChatWindow';
-import { FaPlus, FaMinus, FaPaperPlane } from 'react-icons/fa';
-import { removeWindow, toggleWebAccess, sendMessage, changeModel } from './utils/chatUtils';
+import CommonInput from './components/CommonInput';
+import { FaPlus, FaMinus } from 'react-icons/fa';
+import { removeWindow, toggleWebAccess, sendMessage, changeModel, copyToAllInputs, sendFromIndividualInputs } from './utils/chatUtils';
 import { allModels } from './utils/modelData';
 
 const App = () => {
@@ -72,6 +73,14 @@ const App = () => {
     }
   };
 
+  const handleCopy = () => {
+    copyToAllInputs(commonInput, selectedModels, updateModels);
+  };
+
+  const handleSendIndividual = () => {
+    sendFromIndividualInputs(selectedModels, updateModels);
+  };
+
   return (
     <div className="app">
       <div className={`title-bar ${scrollPosition > 0 ? 'sticky' : ''}`}>
@@ -104,17 +113,13 @@ const App = () => {
             </button>
           </div>
         </div>
-        <form onSubmit={handleCommonSubmit} className="common-input">
-          <input
-            type="text"
-            value={commonInput}
-            onChange={(e) => setCommonInput(e.target.value)}
-            placeholder="Type a message to send to all models..."
-          />
-          <button type="submit" className="send-button">
-            <FaPaperPlane />
-          </button>
-        </form>
+        <CommonInput
+          input={commonInput}
+          setInput={setCommonInput}
+          handleSubmit={handleCommonSubmit}
+          handleCopy={handleCopy}
+          handleSendIndividual={handleSendIndividual}
+        />
       </div>
     </div>
   );
