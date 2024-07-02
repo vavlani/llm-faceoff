@@ -85,3 +85,39 @@ input:checked + .slider:before {
   color: #999;
   margin-left: 5px;
 }
+
+/* Styles for the counter widget */
+.counter-widget {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--secondary-color);
+  border-radius: 20px;
+  padding: 5px 10px;
+}
+
+.counter-title {
+  font-size: 10px;
+  color: var(--text-color);
+  opacity: 0.7;
+  margin-bottom: 2px;
+}
+
+.counter-buttons {
+  display: flex;
+  align-items: center;
+}
+
+.counter-buttons button {
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  color: var(--text-color);
+  padding: 0 5px;
+}
+
+.counter-buttons span {
+  margin: 0 10px;
+  font-size: 16px;
+}
