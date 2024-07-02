@@ -2,11 +2,12 @@ import React, { useState, useRef, useLayoutEffect, useEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { atomDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
-import { FaPaperPlane } from 'react-icons/fa';
+import { FaPaperPlane, FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import Select from 'react-select';
 
 const ChatWindow = ({ model, availableModels, messages, onRemove, webAccess, toggleWebAccess, onSendMessage, onModelChange, currentInput, onInputChange }) => {
   const [input, setInput] = useState(currentInput || '');
+  const [isSubheaderOpen, setIsSubheaderOpen] = useState(false);
 
   useEffect(() => {
     setInput(currentInput || '');
@@ -71,6 +72,16 @@ const ChatWindow = ({ model, availableModels, messages, onRemove, webAccess, tog
           </label>
           <span className="web-access-label">Web Access</span>
           <button onClick={onRemove} className="remove-btn">×</button>
+          <button className="subheader-toggle" onClick={() => setIsSubheaderOpen(!isSubheaderOpen)}>
+            {isSubheaderOpen ? <FaChevronUp /> : <FaChevronDown />}
+          </button>
+        </div>
+      </div>
+      <div className={`chat-subheader ${isSubheaderOpen ? 'open' : ''}`}>
+        <div className="api-info">
+          <span>Last call: </span>
+          <span>{model.lastCallTokens || 0} tokens</span>
+          <span>${(model.lastCallCost || 0).toFixed(4)}</span>
         </div>
       </div>
       <div className="chat-messages" ref={chatMessagesRef}>
