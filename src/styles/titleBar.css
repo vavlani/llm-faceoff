@@ -19,8 +19,19 @@
   text-align: left;
   color: var(--background-color);
   font-family: 'Nunito', sans-serif;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
   background-color: var(--secondary-color);
   padding: 5px 15px;
   border-radius: 20px;
+}
+
+.title-bar h1 .title-icon {
+  margin-right: 10px;
+  font-size: 18px;
+}
+
+.title-bar h1,
+.title-bar h1 .title-icon {
+  color: rgba(0, 0, 0, 0.8);
 }

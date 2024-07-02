@@ -3,7 +3,7 @@ import './App.css';
 import ChatWindow from './components/ChatWindow';
 import CommonInput from './components/CommonInput';
 import Settings from './components/Settings';
-import { FaPlus, FaMinus } from 'react-icons/fa';
+import { FaPlus, FaMinus, FaComments } from 'react-icons/fa';
 import { removeWindow, toggleWebAccess, sendMessage, changeModel, copyToAllInputs, sendFromIndividualInputs, updateIndividualInput } from './utils/chatUtils';
 import { allModels } from './utils/modelData';
 import { initialSettings, applySettings } from './utils/settingsUtils';
@@ -100,7 +100,7 @@ const App = () => {
   return (
     <div className="app">
       <div className={`title-bar ${scrollPosition > 0 ? 'sticky' : ''}`}>
-        <h1>Chat Playground</h1>
+        <h1><FaComments className="title-icon" /> Chat Playground</h1>
         <Settings
           isOpen={isSettingsOpen}
           toggleSettings={toggleSettings}
