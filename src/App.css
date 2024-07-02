@@ -196,8 +196,8 @@ input:checked + .slider:before {
 
 .chat-input button {
   padding: 8px 12px;
-  background-color: #D2B48C;
-  color: #8B4513;
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
   border: none;
   border-radius: 16px;
   margin-left: 10px;
@@ -207,8 +207,8 @@ input:checked + .slider:before {
 }
 
 .chat-input button:hover {
-  background-color: #8B4513;
-  color: #FFF8DC;
+  background-color: var(--primary-color);
+  color: var(--background-color);
 }
 
 .bottom-bar {
@@ -322,8 +322,8 @@ input:checked + .slider:before {
 }
 
 .counter-widget button {
-  background-color: #8B4513;
-  color: #FFF8DC;
+  background-color: var(--primary-color);
+  color: var(--background-color);
   border: none;
   width: 30px;
   height: 30px;
@@ -347,7 +347,7 @@ input:checked + .slider:before {
 }
 
 .counter-widget button:hover:not(:disabled) {
-  background-color: #A0522D;
+  background-color: var(--secondary-color);
 }
 
 .counter-widget button:disabled {
@@ -405,7 +405,7 @@ input:checked + .slider:before {
 }
 
 .react-select__indicator {
-  color: #8B4513 !important;
+  color: var(--primary-color) !important;
 }
 
 /* Settings styles */
@@ -416,7 +416,7 @@ input:checked + .slider:before {
   transform: translateY(-50%);
   background: none;
   border: none;
-  color: #FFF8DC;
+  color: var(--background-color);
   font-size: 20px;
   cursor: pointer;
 }
