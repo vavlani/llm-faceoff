@@ -4,23 +4,15 @@ import { FaPaperPlane, FaCopy, FaShareSquare } from 'react-icons/fa';
 const CommonInput = ({ input, setInput, handleSubmit, handleCopy, handleSendIndividual }) => {
   useEffect(() => {
     const handleKeyDown = (e) => {
-      if (e.ctrlKey || e.metaKey) {
-        switch (e.key) {
-          case 'c':
-            e.preventDefault();
-            handleCopy();
-            break;
-          case 'i':
-            e.preventDefault();
-            handleSendIndividual();
-            break;
-          case 'Enter':
-            e.preventDefault();
-            handleSubmit(e);
-            break;
-          default:
-            break;
-        }
+      if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'C') {
+        e.preventDefault();
+        handleCopy();
+      } else if ((e.ctrlKey || e.metaKey) && e.key === 'i') {
+        e.preventDefault();
+        handleSendIndividual();
+      } else if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+        e.preventDefault();
+        handleSubmit(e);
       }
     };
 
@@ -42,7 +34,7 @@ const CommonInput = ({ input, setInput, handleSubmit, handleCopy, handleSendIndi
         type="button" 
         className="copy-button" 
         onClick={handleCopy} 
-        title="Copy to all inputs (Ctrl+C / Cmd+C)" 
+        title="Copy to all inputs (Ctrl+Shift+C / Cmd+Shift+C)" 
         style={{backgroundColor: '#d2b48c'}}
       >
         <FaCopy />
