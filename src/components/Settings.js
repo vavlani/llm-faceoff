@@ -1,5 +1,6 @@
 import React from 'react';
 import { FaCog, FaTimes } from 'react-icons/fa';
+import Select from 'react-select';
 
 const Settings = ({ isOpen, toggleSettings, settings, updateSetting }) => {
   if (!isOpen) {
@@ -10,6 +11,12 @@ const Settings = ({ isOpen, toggleSettings, settings, updateSetting }) => {
     );
   }
 
+  const themeOptions = [
+    { value: 'earthyBrown', label: 'Earthy Brown' },
+    { value: 'oceanBlue', label: 'Ocean Blue' },
+    { value: 'forestGreen', label: 'Forest Green' },
+  ];
+
   return (
     <div className="settings-modal">
       <div className="settings-content">
@@ -18,27 +25,14 @@ const Settings = ({ isOpen, toggleSettings, settings, updateSetting }) => {
         </button>
         <h2>Settings</h2>
         <div className="setting-item">
-          <label>
-            <input
-              type="checkbox"
-              checked={settings.darkMode}
-              onChange={() => updateSetting('darkMode', !settings.darkMode)}
-            />
-            Dark Mode
-          </label>
-        </div>
-        <div className="setting-item">
-          <label>
-            Theme:
-            <select
-              value={settings.theme}
-              onChange={(e) => updateSetting('theme', e.target.value)}
-            >
-              <option value="earthyBrown">Earthy Brown</option>
-              <option value="oceanBlue">Ocean Blue</option>
-              <option value="forestGreen">Forest Green</option>
-            </select>
-          </label>
+          <label>Theme:</label>
+          <Select
+            value={themeOptions.find(option => option.value === settings.theme)}
+            onChange={(selectedOption) => updateSetting('theme', selectedOption.value)}
+            options={themeOptions}
+            className="theme-selector"
+            classNamePrefix="react-select"
+          />
         </div>
       </div>
     </div>

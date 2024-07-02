@@ -39,18 +39,40 @@
 }
 
 .setting-item {
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 
 .setting-item label {
-  display: flex;
-  align-items: center;
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
 }
 
-.setting-item input[type="checkbox"] {
-  margin-right: 10px;
+.theme-selector {
+  width: 100%;
 }
 
-.setting-item select {
-  margin-left: 10px;
+.react-select__control {
+  border-color: #ddd !important;
+  box-shadow: none !important;
+}
+
+.react-select__control:hover {
+  border-color: var(--primary-color) !important;
+}
+
+.react-select__option {
+  cursor: pointer;
+}
+
+.react-select__option--is-focused {
+  background-color: rgba(0, 0, 0, 0.05) !important;
+}
+
+.react-select__option--is-selected {
+  background-color: var(--primary-color) !important;
+}
+
+.react-select__single-value {
+  color: var(--text-color) !important;
 }
