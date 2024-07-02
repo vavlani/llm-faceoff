@@ -35,26 +35,50 @@
 
 .chat-subheader {
   background-color: #f0f0f0;
-  padding: 5px 15px;
   font-size: 12px;
   overflow: hidden;
   max-height: 0;
-  transition: max-height 0.3s ease-out;
+  transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+  padding: 0 15px;
 }
 
 .chat-subheader.open {
-  max-height: 50px;
-  transition: max-height 0.3s ease-in;
+  max-height: 30px;
+  padding: 5px 15px;
+  transition: max-height 0.3s ease-in, padding 0.3s ease-in;
 }
 
 .api-info {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  height: 20px;
 }
 
 .api-info span {
   margin-right: 10px;
+}
+
+.subheader-toggle {
+  position: relative;
+}
+
+.subheader-toggle::after {
+  content: 'Model details';
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: #f0f0f0;
+  padding: 2px 5px;
+  border-radius: 3px;
+  font-size: 10px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.subheader-toggle:hover::after {
+  opacity: 1;
 }
 
 .subheader-toggle {

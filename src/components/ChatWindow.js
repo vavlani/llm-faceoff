@@ -79,7 +79,7 @@ const ChatWindow = ({ model, availableModels, messages, onRemove, webAccess, tog
       </div>
       <div className={`chat-subheader ${isSubheaderOpen ? 'open' : ''}`}>
         <div className="api-info">
-          <span>Last call: </span>
+          <span>Model details: </span>
           <span>{model.lastCallTokens || 0} tokens</span>
           <span>${(model.lastCallCost || 0).toFixed(4)}</span>
         </div>
