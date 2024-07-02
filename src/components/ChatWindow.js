@@ -1,4 +1,4 @@
-import React, { useState, useRef, useLayoutEffect } from 'react';
+import React, { useState, useRef, useLayoutEffect, useEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { atomDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
@@ -7,6 +7,10 @@ import Select from 'react-select';
 
 const ChatWindow = ({ model, availableModels, messages, onRemove, webAccess, toggleWebAccess, onSendMessage, onModelChange, currentInput, onInputChange }) => {
   const [input, setInput] = useState(currentInput || '');
+
+  useEffect(() => {
+    setInput(currentInput || '');
+  }, [currentInput]);
   const messagesEndRef = useRef(null);
   const chatMessagesRef = useRef(null);
 
