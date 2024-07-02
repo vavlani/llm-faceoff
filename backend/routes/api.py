@@ -1,17 +1,21 @@
 from flask import Blueprint, jsonify, request
 from services import chat_service
+from config.model_config import get_available_models
 
 bp = Blueprint('api', __name__)
 
 @bp.route('/api/chat', methods=['POST'])
 def chat():
-    # Implement chat endpoint
-    pass
+    data = request.json
+    messages = data.get('messages', [])
+    model_name = data.get('model', 'gpt-3.5-turbo')
+    result = chat_service.process_message(messages, model_name)
+    return jsonify(result)
 
 @bp.route('/api/models', methods=['GET'])
 def get_models():
-    # Implement get models endpoint
-    pass
+    models = get_available_models()
+    return jsonify(models)
 
 @bp.route('/api/test', methods=['GET'])
 def test_api():

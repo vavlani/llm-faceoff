@@ -4,6 +4,7 @@ from langchain_openai import ChatOpenAI
 from langchain_anthropic import ChatAnthropic
 from langchain_core.messages import HumanMessage, AIMessage, SystemMessage
 from langchain_community.callbacks import get_openai_callback
+from config.model_config import get_model_config, get_available_models
 
 # Load environment variables
 load_dotenv()
@@ -18,12 +19,15 @@ def init_chat_model(model_name):
     Returns:
         object: An instance of the initialized chat model.
     """
-    if model_name.startswith("gpt-"):
-        return ChatOpenAI(model_name=model_name, openai_api_key=os.getenv("OPENAI_API_KEY"))
-    elif model_name.startswith("claude-"):
-        return ChatAnthropic(model_name=model_name, anthropic_api_key=os.getenv("ANTHROPIC_API_KEY"))
+    model_config = get_model_config(model_name)
+    api_key = os.getenv(model_config.api_key_env)
+    
+    if model_config.provider == "OpenAI":
+        return ChatOpenAI(model_name=model_name, openai_api_key=api_key)
+    elif model_config.provider == "Anthropic":
+        return ChatAnthropic(model_name=model_name, anthropic_api_key=api_key)
     else:
-        raise ValueError(f"Unsupported model: {model_name}")
+        raise ValueError(f"Unsupported provider: {model_config.provider}")
 
 def process_message(messages, model_name):
     """
@@ -47,6 +51,7 @@ def process_message(messages, model_name):
         result = process_message(messages, "gpt-3.5-turbo")
     """
     model = init_chat_model(model_name)
+    model_config = get_model_config(model_name)
     
     # Convert messages to LangChain format
     langchain_messages = []
@@ -59,7 +64,7 @@ def process_message(messages, model_name):
             langchain_messages.append(AIMessage(content=msg['content']))
 
     # Process the message and get the response
-    if model_name.startswith("gpt-"):
+    if model_config.provider == "OpenAI":
         with get_openai_callback() as cb:
             response = model(langchain_messages)
     else:
@@ -84,20 +89,6 @@ def process_message(messages, model_name):
         result["cost"] = "Not available for this model"
 
     return result
-
-def get_available_models():
-    """
-    Retrieve a list of available models.
-
-    Returns:
-        list: A list of dictionaries containing model information.
-    """
-    return [
-        {"name": "gpt-4", "provider": "OpenAI"},
-        {"name": "gpt-3.5-turbo", "provider": "OpenAI"},
-        {"name": "claude-2.1", "provider": "Anthropic"},
-        {"name": "claude-instant-1.2", "provider": "Anthropic"}
-    ]
 
 def test_api_call(model_name="gpt-3.5-turbo"):
     """
