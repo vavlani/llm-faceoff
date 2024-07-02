@@ -163,7 +163,7 @@ input:checked + .slider:before {
 }
 
 .message.ai {
-  background-color: #f0e6db; /* Slightly lighter brown for AI messages */
+  background-color: #f0f0f0; /* Light grey for AI messages */
   align-self: flex-start;
 }
 
