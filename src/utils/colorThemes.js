@@ -16,12 +16,12 @@ export const colorThemes = {
     aiMessage: '#F0F8FF',
   },
   nytimesGray: {
-    primary: '#121212',
-    secondary: '#666666',
-    background: '#FFFFFF',
-    text: '#333333',
-    userMessage: '#F3F3F3',
-    aiMessage: '#FFFFFF',
+    primary: '#4A4A4A',
+    secondary: '#8A8A8A',
+    background: '#F5F5F5',
+    text: '#5A5A5A',
+    userMessage: '#E8E8E8',
+    aiMessage: '#F0F0F0',
   },
 };
 
