@@ -56,3 +56,15 @@
   background-color: var(--secondary-color);
   color: var(--text-color);
 }
+
+.common-input .copy-button,
+.common-input .send-individual-button {
+  background-color: var(--secondary-color);
+  color: var(--text-color);
+}
+
+.common-input .copy-button:hover,
+.common-input .send-individual-button:hover {
+  background-color: var(--primary-color);
+  color: var(--background-color);
+}

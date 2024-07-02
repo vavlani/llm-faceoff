@@ -34,8 +34,7 @@ const CommonInput = ({ input, setInput, handleSubmit, handleCopy, handleSendIndi
         type="button" 
         className="copy-button" 
         onClick={handleCopy} 
-        title="Copy to all inputs (Ctrl+Shift+X or Cmd+Shift+X)" 
-        style={{backgroundColor: '#d2b48c'}}
+        title="Copy to all inputs (Ctrl+Shift+X or Cmd+Shift+X)"
       >
         <FaCopy />
       </button>
@@ -43,16 +42,14 @@ const CommonInput = ({ input, setInput, handleSubmit, handleCopy, handleSendIndi
         type="button" 
         className="send-individual-button" 
         onClick={handleSendIndividual} 
-        title="Send from individual inputs (Ctrl+I / Cmd+I)" 
-        style={{backgroundColor: '#d2b48c'}}
+        title="Send from individual inputs (Ctrl+I / Cmd+I)"
       >
         <FaShareSquare />
       </button>
       <button 
         type="submit" 
         className="send-button" 
-        title="Send to all chat windows (Ctrl+Enter / Cmd+Enter)" 
-        style={{backgroundColor: '#8B4513'}}
+        title="Send to all chat windows (Ctrl+Enter / Cmd+Enter)"
       >
         <FaPaperPlane />
       </button>
