@@ -5,8 +5,8 @@ import { atomDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { FaPaperPlane } from 'react-icons/fa';
 import Select from 'react-select';
 
-const ChatWindow = ({ model, availableModels, messages, onRemove, webAccess, toggleWebAccess, onSendMessage, onModelChange }) => {
-  const [input, setInput] = useState('');
+const ChatWindow = ({ model, availableModels, messages, onRemove, webAccess, toggleWebAccess, onSendMessage, onModelChange, currentInput, onInputChange }) => {
+  const [input, setInput] = useState(currentInput || '');
   const messagesEndRef = useRef(null);
   const chatMessagesRef = useRef(null);
 
@@ -103,7 +103,10 @@ const ChatWindow = ({ model, availableModels, messages, onRemove, webAccess, tog
         <input
           type="text"
           value={input}
-          onChange={(e) => setInput(e.target.value)}
+          onChange={(e) => {
+            setInput(e.target.value);
+            onInputChange(model, e.target.value);
+          }}
           placeholder="Type a message..."
         />
         <button type="submit" className="send-button">
