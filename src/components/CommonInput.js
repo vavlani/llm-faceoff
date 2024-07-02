@@ -16,7 +16,7 @@ const CommonInput = ({ input, setInput, handleSubmit, handleCopy, handleSendIndi
       <button type="button" className="send-individual-button" onClick={handleSendIndividual} title="Send from individual inputs" style={{backgroundColor: '#d2b48c'}}>
         <FaShareSquare />
       </button>
-      <button type="submit" className="send-button" title="Send to all chat windows" style={{backgroundColor: '#d2b48c'}}>
+      <button type="submit" className="send-button" title="Send to all chat windows" style={{backgroundColor: '#8B4513'}}>
         <FaPaperPlane />
       </button>
     </form>
