@@ -114,8 +114,8 @@ input:checked + .slider:before {
   font-size: 12px;
   cursor: pointer;
   color: white;
-  padding: 0 5px;
-  height: 16px;
+  padding: 0 3px;
+  height: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
