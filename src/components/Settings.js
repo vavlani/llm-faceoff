@@ -27,19 +27,6 @@ const Settings = ({ isOpen, toggleSettings, settings, updateSetting }) => {
             Dark Mode
           </label>
         </div>
-        <div className="setting-item">
-          <label>
-            Font Size:
-            <select
-              value={settings.fontSize}
-              onChange={(e) => updateSetting('fontSize', e.target.value)}
-            >
-              <option value="small">Small</option>
-              <option value="medium">Medium</option>
-              <option value="large">Large</option>
-            </select>
-          </label>
-        </div>
       </div>
     </div>
   );
