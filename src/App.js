@@ -3,7 +3,7 @@ import './App.css';
 import ChatWindow from './components/ChatWindow';
 import CommonInput from './components/CommonInput';
 import { FaPlus, FaMinus } from 'react-icons/fa';
-import { removeWindow, toggleWebAccess, sendMessage, changeModel, copyToAllInputs, sendFromIndividualInputs } from './utils/chatUtils';
+import { removeWindow, toggleWebAccess, sendMessage, changeModel, copyToAllInputs, sendFromIndividualInputs, updateIndividualInput } from './utils/chatUtils';
 import { allModels } from './utils/modelData';
 
 const App = () => {
@@ -98,6 +98,8 @@ const App = () => {
             toggleWebAccess={() => toggleWebAccess(model, selectedModels, updateModels)}
             onSendMessage={(message) => sendMessage(model, message, selectedModels, updateModels)}
             onModelChange={(newModelValue) => handleModelChange(model, newModelValue)}
+            currentInput={model.currentInput || ''}
+            onInputChange={(model, input) => updateIndividualInput(model, input, selectedModels, updateModels)}
           />
         ))}
       </div>
