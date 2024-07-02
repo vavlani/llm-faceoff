@@ -185,13 +185,19 @@ input:checked + .slider:before {
 
 .chat-input button {
   padding: 8px 12px;
-  background-color: #8B4513;
-  color: #FFF8DC;
+  background-color: #D2B48C;
+  color: #8B4513;
   border: none;
   border-radius: 16px;
   margin-left: 10px;
   cursor: pointer;
   font-size: 12px;
+  transition: background-color 0.3s ease;
+}
+
+.chat-input button:hover {
+  background-color: #8B4513;
+  color: #FFF8DC;
 }
 
 .bottom-bar {
