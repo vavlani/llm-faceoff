@@ -7,6 +7,9 @@
   padding: 10px 20px;
   z-index: 1000;
   transition: box-shadow 0.3s ease;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .title-bar.sticky {
@@ -34,4 +37,9 @@
 .title-bar h1,
 .title-bar h1 .title-icon {
   color: rgba(0, 0, 0, 0.8);
+}
+
+.title-bar-right {
+  display: flex;
+  align-items: center;
 }
