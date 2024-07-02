@@ -1,11 +1,22 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
 
+:root {
+  --primary-color: #8B4513;
+  --secondary-color: #D2B48C;
+  --background-color: #FFF8DC;
+  --text-color: #000000;
+  --user-message-color: #e6d8cc;
+  --ai-message-color: #f0f0f0;
+}
+
 body, html {
   margin: 0;
   padding: 0;
   height: 100%;
   font-family: 'Nunito', sans-serif;
   font-size: 14px;
+  background-color: var(--background-color);
+  color: var(--text-color);
 }
 
 .app {
@@ -22,7 +33,7 @@ body, html {
   top: 0;
   left: 0;
   right: 0;
-  background-color: #8B4513;
+  background-color: var(--primary-color);
   padding: 10px 20px;
   z-index: 1000;
   transition: box-shadow 0.3s ease;
@@ -36,10 +47,10 @@ body, html {
   margin: 0;
   font-size: 20px;
   text-align: left;
-  color: #FFF8DC;
+  color: var(--background-color);
   font-family: 'Nunito', sans-serif;
   display: inline-block;
-  background-color: #A0522D;
+  background-color: var(--secondary-color);
   padding: 5px 15px;
   border-radius: 20px;
 }
