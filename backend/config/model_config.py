@@ -1,4 +1,5 @@
-from typing import List, Dict
+import os
+from typing import List, Dict, Optional
 
 class ModelConfig:
     def __init__(self, name: str, provider: str, api_key_env: str, initial_message: str):
@@ -6,6 +7,10 @@ class ModelConfig:
         self.provider = provider
         self.api_key_env = api_key_env
         self.initial_message = initial_message
+
+    @property
+    def api_key(self) -> Optional[str]:
+        return os.getenv(self.api_key_env)
 
 AVAILABLE_MODELS: List[ModelConfig] = [
     ModelConfig(
@@ -42,3 +47,10 @@ def get_model_config(model_name: str) -> ModelConfig:
 
 def get_available_models() -> List[Dict[str, str]]:
     return [{"name": model.name, "provider": model.provider} for model in AVAILABLE_MODELS]
+
+def validate_api_keys() -> List[str]:
+    missing_keys = []
+    for model in AVAILABLE_MODELS:
+        if not model.api_key:
+            missing_keys.append(f"{model.provider} API key ({model.api_key_env})")
+    return missing_keys
