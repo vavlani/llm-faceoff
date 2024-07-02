@@ -35,8 +35,19 @@ const App = () => {
   };
 
   const updateSetting = (key, value) => {
-    setSettings({ ...settings, [key]: value });
+    setSettings(prevSettings => {
+      const newSettings = { ...prevSettings, [key]: value };
+      localStorage.setItem('chatPlaygroundSettings', JSON.stringify(newSettings));
+      return newSettings;
+    });
   };
+
+  useEffect(() => {
+    const savedSettings = localStorage.getItem('chatPlaygroundSettings');
+    if (savedSettings) {
+      setSettings(JSON.parse(savedSettings));
+    }
+  }, []);
   const [selectedModels, setSelectedModels] = useState(
     allModels.slice(0, 2).map(model => ({
       ...model,
