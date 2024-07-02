@@ -2,12 +2,16 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import ChatWindow from './components/ChatWindow';
 import CommonInput from './components/CommonInput';
+import Settings from './components/Settings';
 import { FaPlus, FaMinus } from 'react-icons/fa';
 import { removeWindow, toggleWebAccess, sendMessage, changeModel, copyToAllInputs, sendFromIndividualInputs, updateIndividualInput } from './utils/chatUtils';
 import { allModels } from './utils/modelData';
+import { initialSettings, applySettings } from './utils/settingsUtils';
 
 const App = () => {
   const [scrollPosition, setScrollPosition] = useState(0);
+  const [settings, setSettings] = useState(initialSettings);
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -21,6 +25,18 @@ const App = () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
+
+  useEffect(() => {
+    applySettings(settings);
+  }, [settings]);
+
+  const toggleSettings = () => {
+    setIsSettingsOpen(!isSettingsOpen);
+  };
+
+  const updateSetting = (key, value) => {
+    setSettings({ ...settings, [key]: value });
+  };
   const [selectedModels, setSelectedModels] = useState(
     allModels.slice(0, 2).map(model => ({
       ...model,
@@ -85,6 +101,12 @@ const App = () => {
     <div className="app">
       <div className={`title-bar ${scrollPosition > 0 ? 'sticky' : ''}`}>
         <h1>Chat Playground</h1>
+        <Settings
+          isOpen={isSettingsOpen}
+          toggleSettings={toggleSettings}
+          settings={settings}
+          updateSetting={updateSetting}
+        />
       </div>
       <div className="chat-grid">
         {selectedModels.map((model, index) => (
