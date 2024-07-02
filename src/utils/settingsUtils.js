@@ -1,7 +1,7 @@
 import { colorThemes, applyTheme } from './colorThemes';
 
 export const initialSettings = {
-  theme: 'earthyBrown',
+  theme: 'nytimesGray',
 };
 
 export const applySettings = (settings) => {

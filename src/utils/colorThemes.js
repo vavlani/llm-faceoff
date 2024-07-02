@@ -15,13 +15,13 @@ export const colorThemes = {
     userMessage: '#E6F3FF',
     aiMessage: '#F0F8FF',
   },
-  forestGreen: {
-    primary: '#228B22',
-    secondary: '#90EE90',
-    background: '#F0FFF0',
-    text: '#000000',
-    userMessage: '#E6FFE6',
-    aiMessage: '#F0FFF0',
+  nytimesGray: {
+    primary: '#121212',
+    secondary: '#666666',
+    background: '#FFFFFF',
+    text: '#333333',
+    userMessage: '#F3F3F3',
+    aiMessage: '#FFFFFF',
   },
 };
 
