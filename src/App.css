@@ -168,13 +168,13 @@ input:checked + .slider:before {
 }
 
 .message.user {
-  background-color: #e6d8cc; /* Light brown for user messages */
+  background-color: var(--user-message-color);
   align-self: flex-end;
   margin-left: auto;
 }
 
 .message.ai {
-  background-color: #f0f0f0; /* Light grey for AI messages */
+  background-color: var(--ai-message-color);
   align-self: flex-start;
 }
 
