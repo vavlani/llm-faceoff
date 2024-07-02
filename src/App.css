@@ -157,13 +157,13 @@ input:checked + .slider:before {
 }
 
 .message.user {
-  background-color: #e6f2ff;
+  background-color: #e6d8cc; /* Light brown for user messages */
   align-self: flex-end;
   margin-left: auto;
 }
 
 .message.ai {
-  background-color: #f0f0f0;
+  background-color: #f0e6db; /* Slightly lighter brown for AI messages */
   align-self: flex-start;
 }
 
