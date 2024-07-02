@@ -101,14 +101,12 @@ const App = () => {
     <div className="app">
       <div className={`title-bar ${scrollPosition > 0 ? 'sticky' : ''}`}>
         <h1><FaComments className="title-icon" /> Chat Playground</h1>
-        <div className="title-bar-right">
-          <Settings
-            isOpen={isSettingsOpen}
-            toggleSettings={toggleSettings}
-            settings={settings}
-            updateSetting={updateSetting}
-          />
-        </div>
+        <Settings
+          isOpen={isSettingsOpen}
+          toggleSettings={toggleSettings}
+          settings={settings}
+          updateSetting={updateSetting}
+        />
       </div>
       <div className="chat-grid">
         {selectedModels.map((model, index) => (
