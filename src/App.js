@@ -127,7 +127,7 @@ const App = () => {
       </div>
       <div className="bottom-bar">
         <div className="chat-controls">
-          <div className="counter-widget">
+          <div className="counter-widget" title="Number of chat windows">
             <button onClick={removeChatWindow} disabled={selectedModels.length <= 1}>
               <FaMinus />
             </button>
