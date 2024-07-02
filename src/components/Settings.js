@@ -27,6 +27,19 @@ const Settings = ({ isOpen, toggleSettings, settings, updateSetting }) => {
             Dark Mode
           </label>
         </div>
+        <div className="setting-item">
+          <label>
+            Theme:
+            <select
+              value={settings.theme}
+              onChange={(e) => updateSetting('theme', e.target.value)}
+            >
+              <option value="earthyBrown">Earthy Brown</option>
+              <option value="oceanBlue">Ocean Blue</option>
+              <option value="forestGreen">Forest Green</option>
+            </select>
+          </label>
+        </div>
       </div>
     </div>
   );
