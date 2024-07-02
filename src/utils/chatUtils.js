@@ -61,3 +61,10 @@ export const sendFromIndividualInputs = (selectedModels, updateModels) => {
   });
   updateModels(updatedModels);
 };
+
+export const updateIndividualInput = (modelToUpdate, input, selectedModels, updateModels) => {
+  const updatedModels = selectedModels.map(model => 
+    model.value === modelToUpdate.value ? { ...model, currentInput: input } : model
+  );
+  updateModels(updatedModels);
+};
