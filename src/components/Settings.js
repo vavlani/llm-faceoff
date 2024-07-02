@@ -9,6 +9,10 @@ const Settings = ({ isOpen, toggleSettings, settings, updateSetting }) => {
     { value: 'whisperSlate', label: 'Whisper Slate' },
   ];
 
+  const handleApiKeyChange = (provider, value) => {
+    updateSetting('apiKeys', { ...settings.apiKeys, [provider]: value });
+  };
+
   return (
     <>
       <button className={`settings-icon ${isOpen ? 'active' : ''}`} onClick={toggleSettings}>
@@ -30,6 +34,19 @@ const Settings = ({ isOpen, toggleSettings, settings, updateSetting }) => {
               classNamePrefix="react-select"
             />
           </div>
+          <h3>API Keys</h3>
+          {Object.entries(settings.apiKeys).map(([provider, key]) => (
+            <div className="setting-item" key={provider}>
+              <label htmlFor={`${provider}ApiKey`}>{provider.charAt(0).toUpperCase() + provider.slice(1)}:</label>
+              <input
+                type="password"
+                id={`${provider}ApiKey`}
+                value={key}
+                onChange={(e) => handleApiKeyChange(provider, e.target.value)}
+                placeholder={`Enter ${provider} API key`}
+              />
+            </div>
+          ))}
         </div>
       </div>
     </>
