@@ -2,11 +2,14 @@ import os
 from typing import List, Dict, Optional
 
 class ModelConfig:
-    def __init__(self, name: str, provider: str, api_key_env: str, initial_message: str):
+    def __init__(self, name: str, provider: str, api_key_env: str, initial_message: str, max_tokens: int = 1000, temperature: float = 0.7):
         self.name = name
         self.provider = provider
         self.api_key_env = api_key_env
         self.initial_message = initial_message
+        self.max_tokens = max_tokens
+        self.temperature = temperature
+        self.system_message = ""
 
     @property
     def api_key(self) -> Optional[str]:
@@ -17,25 +20,33 @@ AVAILABLE_MODELS: List[ModelConfig] = [
         name="gpt-4",
         provider="OpenAI",
         api_key_env="OPENAI_API_KEY",
-        initial_message="Hello! I'm GPT-4, a large language model. How can I assist you today?"
+        initial_message="Hello! I'm GPT-4, a large language model. How can I assist you today?",
+        max_tokens=1000,
+        temperature=0.7
     ),
     ModelConfig(
         name="gpt-3.5-turbo",
         provider="OpenAI",
         api_key_env="OPENAI_API_KEY",
-        initial_message="Hi there! I'm GPT-3.5 Turbo. What can I help you with?"
+        initial_message="Hi there! I'm GPT-3.5 Turbo. What can I help you with?",
+        max_tokens=1000,
+        temperature=0.7
     ),
     ModelConfig(
         name="claude-2.1",
         provider="Anthropic",
         api_key_env="ANTHROPIC_API_KEY",
-        initial_message="Greetings! I'm Claude 2.1, an AI assistant. How may I be of service?"
+        initial_message="Greetings! I'm Claude 2.1, an AI assistant. How may I be of service?",
+        max_tokens=1000,
+        temperature=0.7
     ),
     ModelConfig(
         name="claude-instant-1.2",
         provider="Anthropic",
         api_key_env="ANTHROPIC_API_KEY",
-        initial_message="Hello! I'm Claude Instant 1.2. How can I assist you today?"
+        initial_message="Hello! I'm Claude Instant 1.2. How can I assist you today?",
+        max_tokens=1000,
+        temperature=0.7
     )
 ]
 

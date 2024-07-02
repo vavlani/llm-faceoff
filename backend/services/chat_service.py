@@ -23,9 +23,19 @@ def init_chat_model(model_name):
     api_key = os.getenv(model_config.api_key_env)
     
     if model_config.provider == "OpenAI":
-        return ChatOpenAI(model_name=model_name, openai_api_key=api_key)
+        return ChatOpenAI(
+            model_name=model_name,
+            openai_api_key=api_key,
+            max_tokens=model_config.max_tokens,
+            temperature=model_config.temperature
+        )
     elif model_config.provider == "Anthropic":
-        return ChatAnthropic(model_name=model_name, anthropic_api_key=api_key)
+        return ChatAnthropic(
+            model_name=model_name,
+            anthropic_api_key=api_key,
+            max_tokens_to_sample=model_config.max_tokens,
+            temperature=model_config.temperature
+        )
     else:
         raise ValueError(f"Unsupported provider: {model_config.provider}")
 
