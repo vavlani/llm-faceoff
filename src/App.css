@@ -400,8 +400,9 @@ input:checked + .slider:before {
 /* Settings styles */
 .settings-icon {
   position: absolute;
-  top: 10px;
+  top: 50%;
   right: 20px;
+  transform: translateY(-50%);
   background: none;
   border: none;
   color: #FFF8DC;
