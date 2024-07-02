@@ -1,7 +1,7 @@
 import { colorThemes, applyTheme } from './colorThemes';
 
 export const initialSettings = {
-  theme: 'nytimesGray',
+  theme: 'whisperSlate',
 };
 
 export const applySettings = (settings) => {

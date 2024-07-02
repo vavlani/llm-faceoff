@@ -14,7 +14,7 @@ const Settings = ({ isOpen, toggleSettings, settings, updateSetting }) => {
   const themeOptions = [
     { value: 'earthyBrown', label: 'Earthy Brown' },
     { value: 'oceanBlue', label: 'Ocean Blue' },
-    { value: 'nytimesGray', label: 'NYTimes Gray' },
+    { value: 'whisperSlate', label: 'Whisper Slate' },
   ];
 
   return (

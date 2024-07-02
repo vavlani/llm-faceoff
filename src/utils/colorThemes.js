@@ -15,7 +15,7 @@ export const colorThemes = {
     userMessage: '#E6F3FF',
     aiMessage: '#F0F8FF',
   },
-  nytimesGray: {
+  whisperSlate: {
     primary: '#4A4A4A',
     secondary: '#8A8A8A',
     background: '#F5F5F5',
