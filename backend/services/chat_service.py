@@ -90,3 +90,19 @@ def get_available_models():
         {"name": "claude-2.1", "provider": "Anthropic"},
         {"name": "claude-instant-1.2", "provider": "Anthropic"}
     ]
+
+def test_api_call(model_name="gpt-3.5-turbo"):
+    """
+    Test the API with a dummy 'hi' message for the specified model.
+
+    Args:
+        model_name (str): The name of the model to test. Defaults to "gpt-3.5-turbo".
+
+    Returns:
+        dict: The result of processing the 'hi' message, including the response, token usage, and cost.
+    """
+    test_messages = [
+        {"role": "system", "content": "You are a helpful assistant."},
+        {"role": "user", "content": "hi"}
+    ]
+    return process_message(test_messages, model_name)
