@@ -1,6 +1,6 @@
 export const colorThemes = {
   earthyBrown: {
-    primary: '#8B4513',
+    primary: '#A67B5B',
     secondary: '#D2B48C',
     background: '#FFF8DC',
     text: '#000000',
@@ -8,7 +8,7 @@ export const colorThemes = {
     aiMessage: '#f0f0f0',
   },
   oceanBlue: {
-    primary: '#1E90FF',
+    primary: '#6CB4EE',
     secondary: '#87CEFA',
     background: '#F0F8FF',
     text: '#000000',
@@ -16,7 +16,7 @@ export const colorThemes = {
     aiMessage: '#F0F8FF',
   },
   whisperSlate: {
-    primary: '#4A4A4A',
+    primary: '#6E6E6E',
     secondary: '#8A8A8A',
     background: '#F5F5F5',
     text: '#5A5A5A',
