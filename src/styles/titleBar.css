@@ -1,0 +1,26 @@
+.title-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: var(--primary-color);
+  padding: 10px 20px;
+  z-index: 1000;
+  transition: box-shadow 0.3s ease;
+}
+
+.title-bar.sticky {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.title-bar h1 {
+  margin: 0;
+  font-size: 20px;
+  text-align: left;
+  color: var(--background-color);
+  font-family: 'Nunito', sans-serif;
+  display: inline-block;
+  background-color: var(--secondary-color);
+  padding: 5px 15px;
+  border-radius: 20px;
+}

@@ -1,0 +1,57 @@
+.chat-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.counter-widget {
+  display: flex;
+  align-items: center;
+  background-color: #f0f0f0;
+  border-radius: 20px;
+  padding: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.counter-widget button {
+  background-color: var(--primary-color);
+  color: var(--background-color);
+  border: none;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+  font-size: 16px;
+  border-radius: 15px;
+}
+
+.counter-widget button:first-child {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.counter-widget button:last-child {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.counter-widget button:hover:not(:disabled) {
+  background-color: var(--secondary-color);
+}
+
+.counter-widget button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.counter-widget span {
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--primary-color);
+  margin: 0 15px;
+  min-width: 20px;
+  text-align: center;
+}

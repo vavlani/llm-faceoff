@@ -1,0 +1,34 @@
+body.dark-mode {
+  background-color: #333;
+  color: #fff;
+}
+
+body.dark-mode .chat-window {
+  background-color: #444;
+}
+
+body.dark-mode .chat-header {
+  background-color: #555;
+}
+
+body.dark-mode .message.user {
+  background-color: #666;
+}
+
+body.dark-mode .message.ai {
+  background-color: #777;
+}
+
+body.dark-mode .chat-input input {
+  background-color: #555;
+  color: #fff;
+}
+
+body.dark-mode .bottom-bar {
+  background-color: #444;
+}
+
+body.dark-mode .common-input input {
+  background-color: #555;
+  color: #fff;
+}
