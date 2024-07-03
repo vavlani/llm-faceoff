@@ -6,7 +6,7 @@ from langchain_openai import ChatOpenAI
 from langchain_anthropic import ChatAnthropic
 from langchain_core.messages import HumanMessage, AIMessage, SystemMessage
 from langchain_community.callbacks import get_openai_callback
-from ..config.model_config import get_model_config, get_available_models
+from config.model_config import get_model_config, get_available_models
 
 # Load environment variables
 load_dotenv()
