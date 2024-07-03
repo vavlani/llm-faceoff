@@ -101,7 +101,12 @@ export const updateSelectedModels = (updatedModels, updateModels) => {
 export const changeModel = (modelToChange, newModelValue, selectedModels, availableModels, updateModels) => {
   const newModel = availableModels.find(model => model.value === newModelValue);
   const updatedModels = selectedModels.map(model => 
-    model.value === modelToChange.value ? {...newModel, messages: model.messages, webAccess: model.webAccess} : model
+    model.value === modelToChange.value ? {
+      ...model,
+      label: newModel.label,
+      value: newModel.value,
+      provider: newModel.provider
+    } : model
   );
   updateModels(updatedModels);
 };
