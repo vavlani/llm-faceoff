@@ -37,19 +37,12 @@ export const toggleWebAccess = (modelToToggle, selectedModels, updateModels) => 
  * @param {Array} selectedModels - Current list of selected models
  * @param {Function} updateModels - Function to update the models state
  */
-export const sendMessage = async (modelToUpdate, message, selectedModels, updateModels) => {
+export const sendMessage = async (modelToUpdate, message, selectedModels, updateModels, isCommonInput = false) => {
   try {
-    const modelToSend = selectedModels.find(model => model.value === modelToUpdate.value);
-    const formattedMessages = modelToSend.messages.map(msg => ({
-      role: msg.sender === 'human' ? 'user' : 'assistant',
-      content: msg.text
-    }));
+    let modelsToUpdate = isCommonInput ? selectedModels : [selectedModels.find(model => model.value === modelToUpdate.value)];
 
-    formattedMessages.push({ role: 'user', content: message });
-
-    // Add the human message to the chat history
     const updatedModelsWithHumanMessage = selectedModels.map(model => 
-      model.value === modelToUpdate.value ? {
+      modelsToUpdate.some(m => m.value === model.value) ? {
         ...model, 
         messages: [
           ...model.messages, 
@@ -59,23 +52,31 @@ export const sendMessage = async (modelToUpdate, message, selectedModels, update
     );
     updateModels(updatedModelsWithHumanMessage);
 
-    const response = await axios.post(`${API_URL}/chat`, {
-      messages: formattedMessages,
-      model: modelToUpdate.value
-    });
+    const finalUpdatedModels = await Promise.all(updatedModelsWithHumanMessage.map(async (model) => {
+      if (modelsToUpdate.some(m => m.value === model.value)) {
+        const formattedMessages = model.messages.map(msg => ({
+          role: msg.sender === 'human' ? 'user' : 'assistant',
+          content: msg.text
+        }));
 
-    const aiResponse = response.data.response;
+        const response = await axios.post(`${API_URL}/chat`, {
+          messages: formattedMessages,
+          model: model.value
+        });
 
-    // Add the AI response to the chat history
-    const finalUpdatedModels = updatedModelsWithHumanMessage.map(model => 
-      model.value === modelToUpdate.value ? {
-        ...model, 
-        messages: [
-          ...model.messages, 
-          { text: aiResponse, sender: 'ai' }
-        ]
-      } : model
-    );
+        const aiResponse = response.data.response;
+
+        return {
+          ...model,
+          messages: [
+            ...model.messages,
+            { text: aiResponse, sender: 'ai' }
+          ]
+        };
+      }
+      return model;
+    }));
+
     updateModels(finalUpdatedModels);
   } catch (error) {
     console.error('Error sending message:', error);
