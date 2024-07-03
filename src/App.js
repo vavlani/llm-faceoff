@@ -127,7 +127,7 @@ const App = () => {
     <div className="app">
       {/* Title bar with sticky behavior based on scroll position */}
       <div className={`title-bar ${scrollPosition > 0 ? 'sticky' : ''}`}>
-        <h1><FaComments className="title-icon" /> Chat Playground</h1>
+        <h1><FaComments className="title-icon" /> model-faceoff</h1>
         <Settings
           isOpen={isSettingsOpen}
           toggleSettings={toggleSettings}
