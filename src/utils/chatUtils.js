@@ -39,7 +39,7 @@ export const sendMessage = (modelToUpdate, message, selectedModels, updateModels
       ...model, 
       messages: [
         ...model.messages, 
-        { text: message, sender: 'user' },
+        { text: message, sender: 'human' },
         { text: `You said: ${message}`, sender: 'ai' }
       ]
     } : model
@@ -98,7 +98,7 @@ export const sendFromIndividualInputs = (selectedModels, updateModels) => {
         ...model,
         messages: [
           ...model.messages,
-          { text: model.currentInput, sender: 'user' },
+          { text: model.currentInput, sender: 'human' },
           { text: `You said: ${model.currentInput}`, sender: 'ai' }
         ],
         currentInput: ''
