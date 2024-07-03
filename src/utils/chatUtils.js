@@ -39,6 +39,14 @@ export const toggleWebAccess = (modelToToggle, selectedModels, updateModels) => 
  */
 export const sendMessage = async (modelToUpdate, message, selectedModels, updateModels) => {
   try {
+    const modelToSend = selectedModels.find(model => model.value === modelToUpdate.value);
+    const formattedMessages = modelToSend.messages.map(msg => ({
+      role: msg.sender === 'human' ? 'user' : 'assistant',
+      content: msg.text
+    }));
+
+    formattedMessages.push({ role: 'user', content: message });
+
     const updatedModels = selectedModels.map(model => 
       model.value === modelToUpdate.value ? {
         ...model, 
@@ -51,11 +59,11 @@ export const sendMessage = async (modelToUpdate, message, selectedModels, update
     updateModels(updatedModels);
 
     const response = await axios.post(`${API_URL}/chat`, {
-      messages: [{ role: 'user', content: message }],
+      messages: formattedMessages,
       model: modelToUpdate.value
     });
 
-    const aiResponse = response.data.choices[0].message.content;
+    const aiResponse = response.data.response;
 
     const finalUpdatedModels = selectedModels.map(model => 
       model.value === modelToUpdate.value ? {
@@ -121,12 +129,19 @@ export const sendFromIndividualInputs = async (selectedModels, updateModels) => 
   const updatedModels = await Promise.all(selectedModels.map(async (model) => {
     if (model.currentInput && model.currentInput.trim()) {
       try {
+        const formattedMessages = model.messages.map(msg => ({
+          role: msg.sender === 'human' ? 'user' : 'assistant',
+          content: msg.text
+        }));
+
+        formattedMessages.push({ role: 'user', content: model.currentInput });
+
         const response = await axios.post(`${API_URL}/chat`, {
-          messages: [{ role: 'user', content: model.currentInput }],
+          messages: formattedMessages,
           model: model.value
         });
 
-        const aiResponse = response.data.choices[0].message.content;
+        const aiResponse = response.data.response;
 
         return {
           ...model,
