@@ -2,6 +2,10 @@
 // such as removing chat windows, toggling web access, sending messages,
 // and updating model selections.
 
+import axios from 'axios';
+
+const API_URL = 'http://localhost:5050/api';
+
 /**
  * Removes a chat window for a specific model
  * @param {Object} modelToRemove - The model to remove
@@ -33,18 +37,40 @@ export const toggleWebAccess = (modelToToggle, selectedModels, updateModels) => 
  * @param {Array} selectedModels - Current list of selected models
  * @param {Function} updateModels - Function to update the models state
  */
-export const sendMessage = (modelToUpdate, message, selectedModels, updateModels) => {
-  const updatedModels = selectedModels.map(model => 
-    model.value === modelToUpdate.value ? {
-      ...model, 
-      messages: [
-        ...model.messages, 
-        { text: message, sender: 'human' },
-        { text: `You said: ${message}`, sender: 'ai' }
-      ]
-    } : model
-  );
-  updateModels(updatedModels);
+export const sendMessage = async (modelToUpdate, message, selectedModels, updateModels) => {
+  try {
+    const updatedModels = selectedModels.map(model => 
+      model.value === modelToUpdate.value ? {
+        ...model, 
+        messages: [
+          ...model.messages, 
+          { text: message, sender: 'human' }
+        ]
+      } : model
+    );
+    updateModels(updatedModels);
+
+    const response = await axios.post(`${API_URL}/chat`, {
+      messages: [{ role: 'user', content: message }],
+      model: modelToUpdate.value
+    });
+
+    const aiResponse = response.data.choices[0].message.content;
+
+    const finalUpdatedModels = selectedModels.map(model => 
+      model.value === modelToUpdate.value ? {
+        ...model, 
+        messages: [
+          ...model.messages, 
+          { text: aiResponse, sender: 'ai' }
+        ]
+      } : model
+    );
+    updateModels(finalUpdatedModels);
+  } catch (error) {
+    console.error('Error sending message:', error);
+    // Handle error (e.g., show an error message to the user)
+  }
 };
 
 /**
@@ -91,21 +117,43 @@ export const copyToAllInputs = (input, selectedModels, updateModels) => {
  * @param {Array} selectedModels - Current list of selected models
  * @param {Function} updateModels - Function to update the models state
  */
-export const sendFromIndividualInputs = (selectedModels, updateModels) => {
-  const updatedModels = selectedModels.map(model => {
+export const sendFromIndividualInputs = async (selectedModels, updateModels) => {
+  const updatedModels = await Promise.all(selectedModels.map(async (model) => {
     if (model.currentInput && model.currentInput.trim()) {
-      return {
-        ...model,
-        messages: [
-          ...model.messages,
-          { text: model.currentInput, sender: 'human' },
-          { text: `You said: ${model.currentInput}`, sender: 'ai' }
-        ],
-        currentInput: ''
-      };
+      try {
+        const response = await axios.post(`${API_URL}/chat`, {
+          messages: [{ role: 'user', content: model.currentInput }],
+          model: model.value
+        });
+
+        const aiResponse = response.data.choices[0].message.content;
+
+        return {
+          ...model,
+          messages: [
+            ...model.messages,
+            { text: model.currentInput, sender: 'human' },
+            { text: aiResponse, sender: 'ai' }
+          ],
+          currentInput: ''
+        };
+      } catch (error) {
+        console.error(`Error sending message for model ${model.value}:`, error);
+        // Handle error (e.g., add an error message to the chat)
+        return {
+          ...model,
+          messages: [
+            ...model.messages,
+            { text: model.currentInput, sender: 'human' },
+            { text: 'Error: Unable to get response from the server.', sender: 'ai' }
+          ],
+          currentInput: ''
+        };
+      }
     }
     return model;
-  });
+  }));
+
   updateModels(updatedModels);
 };
 
