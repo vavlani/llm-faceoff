@@ -86,7 +86,7 @@ const ChatWindow = ({ model, availableModels, messages, onRemove, webAccess, tog
       </div>
       <div className="chat-messages" ref={chatMessagesRef}>
         {messages.map((message, index) => (
-          <div key={index} className={`message ${message.sender}`}>
+          <div key={index} className={`message ${message.sender === 'human' ? 'user' : 'ai'}`}>
             <ReactMarkdown
               components={{
                 code({node, inline, className, children, ...props}) {

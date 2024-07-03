@@ -115,6 +115,12 @@
 .message.ai {
   background-color: var(--ai-message-color);
   align-self: flex-start;
+  margin-right: auto;
+}
+
+.chat-messages {
+  display: flex;
+  flex-direction: column;
 }
 
 .chat-input {
