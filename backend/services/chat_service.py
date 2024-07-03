@@ -78,6 +78,10 @@ def process_message(messages, model_name):
         elif msg['role'] == 'ai':
             langchain_messages.append(AIMessage(content=msg['content']))
 
+    # Ensure there's at least one message
+    if not langchain_messages:
+        langchain_messages.append(SystemMessage(content="You are a helpful assistant."))
+
     # Process the message and get the response
     if model_config.provider == "OpenAI":
         with get_openai_callback() as cb:

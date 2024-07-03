@@ -9,6 +9,11 @@ def chat():
     data = request.json
     messages = data.get('messages', [])
     model_name = data.get('model', 'gpt-3.5-turbo')
+    
+    # Ensure there's at least one message
+    if not messages:
+        messages = [{"role": "system", "content": "You are a helpful assistant."}]
+    
     result = chat_service.process_message(messages, model_name)
     return jsonify(result)
 
