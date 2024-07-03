@@ -2,7 +2,8 @@ import os
 from typing import List, Dict, Optional
 
 class ModelConfig:
-    def __init__(self, name: str, provider: str, api_key_env: str, initial_message: str, max_tokens: int = 1000, temperature: float = 0.7):
+    def __init__(self, name: str, provider: str, api_key_env: str, initial_message: str, 
+    max_tokens: int = 1000, temperature: float = 0.7):
         self.name = name
         self.provider = provider
         self.api_key_env = api_key_env
@@ -17,7 +18,7 @@ class ModelConfig:
 
 AVAILABLE_MODELS: List[ModelConfig] = [
     ModelConfig(
-        name="gpt-4",
+        name="gpt-4o",
         provider="OpenAI",
         api_key_env="OPENAI_API_KEY",
         initial_message="Hello! I'm GPT-4, a large language model. How can I assist you today?",
@@ -33,18 +34,18 @@ AVAILABLE_MODELS: List[ModelConfig] = [
         temperature=0.7
     ),
     ModelConfig(
-        name="claude-2.1",
+        name="claude-3-5-sonnet-20240620",
         provider="Anthropic",
         api_key_env="ANTHROPIC_API_KEY",
-        initial_message="Greetings! I'm Claude 2.1, an AI assistant. How may I be of service?",
+        initial_message="Greetings! I'm Claude 3.5 Sonnet. How may I be of service?",
         max_tokens=1000,
         temperature=0.7
     ),
     ModelConfig(
-        name="claude-instant-1.2",
+        name="claude-3-haiku-20240307",
         provider="Anthropic",
         api_key_env="ANTHROPIC_API_KEY",
-        initial_message="Hello! I'm Claude Instant 1.2. How can I assist you today?",
+        initial_message="Hello! I'm Claude 3 Haiku. How can I assist you today?",
         max_tokens=1000,
         temperature=0.7
     )
