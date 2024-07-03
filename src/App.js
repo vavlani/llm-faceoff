@@ -18,7 +18,7 @@ const App = () => {
   // Effect to handle scroll position for sticky header
   useEffect(() => {
     const handleScroll = () => {
-      const position = window.pageYOffset;
+      const position = window.scrollY;
       setScrollPosition(position);
     };
 
