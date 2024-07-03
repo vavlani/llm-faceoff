@@ -1,4 +1,6 @@
 import os
+import time
+from datetime import datetime
 from dotenv import load_dotenv
 from langchain_openai import ChatOpenAI
 from langchain_anthropic import ChatAnthropic
@@ -49,7 +51,7 @@ def process_message(messages, model_name):
         model_name (str): The name of the model to use for processing.
 
     Returns:
-        dict: A dictionary containing the model's response, token usage, and cost.
+        dict: A dictionary containing the model's response, token usage, cost, request timestamp, and response time.
 
     Example:
         messages = [
@@ -60,6 +62,9 @@ def process_message(messages, model_name):
         ]
         result = process_message(messages, "gpt-3.5-turbo")
     """
+    request_timestamp = datetime.now().isoformat()
+    start_time = time.time()
+
     model = init_chat_model(model_name)
     model_config = get_model_config(model_name)
     
@@ -81,10 +86,15 @@ def process_message(messages, model_name):
         response = model(langchain_messages)
         cb = None
 
+    end_time = time.time()
+    response_time = end_time - start_time
+
     # Prepare the result
     result = {
         "response": response.content,
         "model_name": model_name,
+        "request_timestamp": request_timestamp,
+        "response_time": response_time
     }
     
     if cb:
