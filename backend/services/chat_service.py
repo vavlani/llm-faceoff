@@ -82,17 +82,9 @@ def process_message(messages, model_name):
     if not langchain_messages:
         langchain_messages.append(SystemMessage(content=model_config.system_message))
     
-    # If there's no user message, add a default one
-    if not any(isinstance(msg, HumanMessage) for msg in langchain_messages):
-        langchain_messages.append(HumanMessage(content="Hello"))
-
-    # Process the message and get the response
-    if model_config.provider == "OpenAI":
-        with get_openai_callback() as cb:
-            response = model(langchain_messages)
-    else:
-        response = model(langchain_messages)
-        cb = None
+    # Always respond with "ok"
+    response = AIMessage(content="ok")
+    cb = None
 
     end_time = time.time()
     response_time = end_time - start_time
