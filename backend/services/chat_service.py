@@ -82,6 +82,10 @@ def process_message(messages, model_name):
     if not langchain_messages:
         langchain_messages.append(SystemMessage(content=model_config.system_message))
     
+    # If there's no user message, add a default one
+    if not any(isinstance(msg, HumanMessage) for msg in langchain_messages):
+        langchain_messages.append(HumanMessage(content="Say ok no matter what I say"))
+
     # Always respond with "ok"
     response = AIMessage(content="ok")
     cb = None
