@@ -47,7 +47,8 @@ export const sendMessage = async (modelToUpdate, message, selectedModels, update
 
     formattedMessages.push({ role: 'user', content: message });
 
-    const updatedModels = selectedModels.map(model => 
+    // Add the human message to the chat history
+    const updatedModelsWithHumanMessage = selectedModels.map(model => 
       model.value === modelToUpdate.value ? {
         ...model, 
         messages: [
@@ -56,7 +57,7 @@ export const sendMessage = async (modelToUpdate, message, selectedModels, update
         ]
       } : model
     );
-    updateModels(updatedModels);
+    updateModels(updatedModelsWithHumanMessage);
 
     const response = await axios.post(`${API_URL}/chat`, {
       messages: formattedMessages,
@@ -65,7 +66,8 @@ export const sendMessage = async (modelToUpdate, message, selectedModels, update
 
     const aiResponse = response.data.response;
 
-    const finalUpdatedModels = selectedModels.map(model => 
+    // Add the AI response to the chat history
+    const finalUpdatedModels = updatedModelsWithHumanMessage.map(model => 
       model.value === modelToUpdate.value ? {
         ...model, 
         messages: [
