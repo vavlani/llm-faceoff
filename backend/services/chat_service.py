@@ -80,7 +80,11 @@ def process_message(messages, model_name):
 
     # Ensure there's at least one message
     if not langchain_messages:
-        langchain_messages.append(SystemMessage(content="You are a helpful assistant."))
+        langchain_messages.append(SystemMessage(content=model_config.system_message))
+    
+    # If there's no user message, add a default one
+    if not any(isinstance(msg, HumanMessage) for msg in langchain_messages):
+        langchain_messages.append(HumanMessage(content="Hello"))
 
     # Process the message and get the response
     if model_config.provider == "OpenAI":
