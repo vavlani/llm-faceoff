@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request
-from backend.services import chat_service
+from services import chat_service
 from config.model_config import get_available_models
 
 bp = Blueprint('api', __name__)
