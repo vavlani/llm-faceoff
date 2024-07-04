@@ -37,13 +37,13 @@ const Settings = ({ isOpen, toggleSettings, settings, updateSetting }) => {
             />
           </div>
           <h3>API Keys</h3>
-          {Object.entries(settings.apiKeys).map(([provider, key]) => (
+          {apiKeyProviders.map((provider) => (
             <div className="setting-item" key={provider}>
-              <label htmlFor={`${provider}ApiKey`}>{provider.charAt(0).toUpperCase() + provider.slice(1)}:</label>
+              <label htmlFor={`${provider}ApiKey`}>{provider}:</label>
               <input
                 type="password"
                 id={`${provider}ApiKey`}
-                value={key}
+                value={settings.apiKeys[provider] || ''}
                 onChange={(e) => handleApiKeyChange(provider, e.target.value)}
                 placeholder={`Enter ${provider} API key`}
               />
