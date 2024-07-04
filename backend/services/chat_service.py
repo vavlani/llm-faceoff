@@ -43,10 +43,17 @@ def init_chat_model(model_name):
         )
     elif model_config.provider == "Google":
         if not api_key:
-            raise ValueError(f"Google API key not found for model {model_name}. Please check your environment variables.")
+            fallback_key = os.getenv('GOOGLE_API_KEY')
+            if fallback_key:
+                print(f"Using fallback GOOGLE_API_KEY for model {model_name}")
+                api_key = fallback_key
+            else:
+                print(f"API key not found in {model_config.api_key_env} or GOOGLE_API_KEY")
+                print(f"Available environment variables: {list(os.environ.keys())}")
+                raise ValueError(f"Google API key not found for model {model_name}. Please check your environment variables.")
         return ChatGoogleGenerativeAI(
             model=model_name,
-            api_key=api_key,
+            google_api_key=api_key,  # Use google_api_key instead of api_key
             max_output_tokens=model_config.max_tokens,
             temperature=model_config.temperature
         )
