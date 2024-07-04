@@ -65,12 +65,14 @@ const ChatWindow = ({ model, availableModels, messages, onRemove, webAccess, tog
               color: 'black',
               fontFamily: "'Nunito', sans-serif",
               fontWeight: 'bold',
+              fontSize: '0.9rem', // Reduced font size
             }),
             option: (provided, state) => ({
               ...provided,
               backgroundColor: state.isSelected ? '#007bff' : state.isFocused ? '#e6f2ff' : 'white',
               color: state.isSelected ? 'white' : 'black',
               fontFamily: "'Nunito', sans-serif",
+              fontSize: '0.9rem', // Reduced font size
             }),
           }}
         />
