@@ -19,10 +19,10 @@ const ChatWindow = ({ model, availableModels, messages, onRemove, webAccess, tog
       const lastMessage = messages[messages.length - 1];
       if (lastMessage.sender === 'human' && lastMessage.id !== lastMessageId) {
         setLastMessageId(lastMessage.id);
-        onSendMessage(lastMessage.text);
+        // Remove the automatic triggering of onSendMessage here
       }
     }
-  }, [messages, onSendMessage, lastMessageId]);
+  }, [messages, lastMessageId]);
 
   const messagesEndRef = useRef(null);
   const chatMessagesRef = useRef(null);
@@ -38,6 +38,7 @@ const ChatWindow = ({ model, availableModels, messages, onRemove, webAccess, tog
     if (input.trim()) {
       onSendMessage(input);
       setInput('');
+      setLastMessageId(Date.now().toString()); // Update lastMessageId here
     }
   };
 
