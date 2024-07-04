@@ -7,6 +7,9 @@ from langchain_anthropic import ChatAnthropic
 from langchain_core.messages import HumanMessage, AIMessage, SystemMessage
 from langchain_community.callbacks import get_openai_callback
 from config.model_config import get_model_config, get_available_models
+from langchain_google_genai import ChatGoogleGenerativeAI
+import time
+
 
 # Load environment variables
 load_dotenv()
@@ -38,6 +41,13 @@ def init_chat_model(model_name):
             max_tokens=model_config.max_tokens,
             temperature=model_config.temperature
         )
+    elif model_config.provider == "Google":
+        return ChatGoogleGenerativeAI(
+            model=model_name,
+            api_key=api_key,
+            max_tokens=model_config.max_tokens,
+            temperature=model_config.temperature
+        )
     else:
         raise ValueError(f"Unsupported provider: {model_config.provider}")
 
@@ -62,6 +72,8 @@ def process_message(messages, model_name):
         ]
         result = process_message(messages, "gpt-3.5-turbo")
     """
+    time.sleep(2)
+
     request_timestamp = datetime.now().isoformat()
     start_time = time.time()
 
@@ -84,11 +96,15 @@ def process_message(messages, model_name):
     
     # If there's no user message, add a default one
     if not any(isinstance(msg, HumanMessage) for msg in langchain_messages):
-        langchain_messages.append(HumanMessage(content="Say ok no matter what I say"))
+        langchain_messages.append(HumanMessage(content="Just respond with ok.. no matter what and then your model name"))
 
-    # Always respond with "ok"
-    response = AIMessage(content="ok")
-    cb = None
+    # Process the message and get the response
+    if model_config.provider == "OpenAI":
+        with get_openai_callback() as cb:
+            response = model(langchain_messages)
+    else:
+        response = model(langchain_messages)
+        cb = None
 
     end_time = time.time()
     response_time = end_time - start_time
@@ -100,16 +116,15 @@ def process_message(messages, model_name):
         "request_timestamp": request_timestamp,
         "response_time": response_time
     }
-    
+
+    result["usage"] = {
+        "input_tokens": response.usage_metadata['input_tokens'],
+        "output_tokens": response.usage_metadata['output_tokens'],
+        "total_tokens": response.usage_metadata['total_tokens']
+    }
     if cb:
-        result["usage"] = {
-            "input_tokens": cb.prompt_tokens,
-            "output_tokens": cb.completion_tokens,
-            "total_tokens": cb.total_tokens
-        }
         result["cost"] = cb.total_cost
     else:
-        result["usage"] = "Not available for this model"
         result["cost"] = "Not available for this model"
 
     return result
