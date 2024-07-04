@@ -66,7 +66,17 @@ AVAILABLE_MODELS: List[ModelConfig] = [
         max_tokens=1000,
         temperature=0.7,
         system_message="You are an LLM from Google. Provide brief but informative responses."
+    ),
+    ModelConfig(
+        name="gemini-1.5-flash",
+        provider="Google",
+        api_key_env="GOOGLE_API_KEY",
+        initial_message="Hello! I'm Gemini 1.5 Flash. How can I assist you today?",
+        max_tokens=1000,
+        temperature=0.7,
+        system_message="You are an LLM from Google. Provide brief but informative responses."
     )
+    
     
 ]
 
