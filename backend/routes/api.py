@@ -10,14 +10,21 @@ def chat():
     messages = data.get('messages', [])
     model_name = data.get('model', 'gpt-3.5-turbo')
     
-    # Print the incoming request
-    print(f"Received chat request. Model: {model_name}, Messages: {messages}")
+    # Convert role names
+    converted_messages = [
+        {"role": "human" if msg["role"] == "user" else "ai" if msg["role"] == "assistant" else msg["role"],
+         "content": msg["content"]}
+        for msg in messages
+    ]
+    
+    # Print the incoming request with converted messages
+    print(f"Received chat request. Model: {model_name}, Messages: {converted_messages}")
     
     # Ensure there's at least one message
-    if not messages:
-        messages = [{"role": "system", "content": "You are a helpful assistant."}]
+    if not converted_messages:
+        converted_messages = [{"role": "system", "content": "You are a helpful assistant."}]
     
-    result = chat_service.process_message(messages, model_name)
+    result = chat_service.process_message(converted_messages, model_name)
     
     # Print the response
     print(f"Chat response: {result}")
