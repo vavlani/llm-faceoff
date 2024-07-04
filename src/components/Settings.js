@@ -13,6 +13,8 @@ const Settings = ({ isOpen, toggleSettings, settings, updateSetting }) => {
     updateSetting('apiKeys', { ...settings.apiKeys, [provider]: value });
   };
 
+  const apiKeyProviders = ['Google', 'Anthropic', 'OpenAI'];
+
   return (
     <>
       <button className={`settings-icon ${isOpen ? 'active' : ''}`} onClick={toggleSettings}>
