@@ -42,10 +42,12 @@ def init_chat_model(model_name):
             temperature=model_config.temperature
         )
     elif model_config.provider == "Google":
+        if not api_key:
+            raise ValueError(f"Google API key not found for model {model_name}. Please check your environment variables.")
         return ChatGoogleGenerativeAI(
             model=model_name,
-            api_key=api_key,
-            max_tokens=model_config.max_tokens,
+            google_api_key=api_key,
+            max_output_tokens=model_config.max_tokens,
             temperature=model_config.temperature
         )
     else:
