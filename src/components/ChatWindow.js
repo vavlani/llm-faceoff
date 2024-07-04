@@ -8,10 +8,22 @@ import Select from 'react-select';
 const ChatWindow = ({ model, availableModels, messages, onRemove, webAccess, toggleWebAccess, onSendMessage, onModelChange, currentInput, onInputChange }) => {
   const [input, setInput] = useState(currentInput || '');
   const [isSubheaderOpen, setIsSubheaderOpen] = useState(false);
+  const [lastMessageId, setLastMessageId] = useState(null);
 
   useEffect(() => {
     setInput(currentInput || '');
   }, [currentInput]);
+
+  useEffect(() => {
+    if (messages.length > 0) {
+      const lastMessage = messages[messages.length - 1];
+      if (lastMessage.sender === 'human' && lastMessage.id !== lastMessageId) {
+        setLastMessageId(lastMessage.id);
+        onSendMessage(lastMessage.text);
+      }
+    }
+  }, [messages, onSendMessage, lastMessageId]);
+
   const messagesEndRef = useRef(null);
   const chatMessagesRef = useRef(null);
 
