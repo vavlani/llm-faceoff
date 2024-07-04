@@ -12,7 +12,7 @@ import time
 
 
 # Load environment variables
-load_dotenv()
+# load_dotenv()
 
 def init_chat_model(model_name):
     """
@@ -46,7 +46,7 @@ def init_chat_model(model_name):
             raise ValueError(f"Google API key not found for model {model_name}. Please check your environment variables.")
         return ChatGoogleGenerativeAI(
             model=model_name,
-            google_api_key=api_key,
+            api_key=api_key,
             max_output_tokens=model_config.max_tokens,
             temperature=model_config.temperature
         )
