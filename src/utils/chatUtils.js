@@ -47,7 +47,8 @@ export const sendMessage = async (modelToUpdate, message, selectedModels, update
         messages: [
           ...model.messages, 
           { text: message, sender: 'human' }
-        ]
+        ],
+        currentInput: ''
       } : model
     );
     updateModels(updatedModelsWithHumanMessage);
