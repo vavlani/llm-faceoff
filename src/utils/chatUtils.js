@@ -47,7 +47,7 @@ export const sendMessage = async (modelToUpdate, message, selectedModels, update
         ...model, 
         messages: [
           ...model.messages, 
-          { text: message, sender: 'human' }
+          { id: Date.now().toString(), text: message, sender: 'human' }
         ],
         currentInput: ''
       } : model
