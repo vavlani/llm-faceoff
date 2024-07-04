@@ -41,6 +41,7 @@ export const sendMessage = async (modelToUpdate, message, selectedModels, update
   try {
     let modelsToUpdate = isCommonInput ? selectedModels : [selectedModels.find(model => model.value === modelToUpdate.value)];
 
+    // Immediately update models with the human message
     const updatedModelsWithHumanMessage = selectedModels.map(model => 
       modelsToUpdate.some(m => m.value === model.value) ? {
         ...model, 
@@ -53,6 +54,7 @@ export const sendMessage = async (modelToUpdate, message, selectedModels, update
     );
     updateModels(updatedModelsWithHumanMessage);
 
+    // Then trigger the model calls
     const finalUpdatedModels = await Promise.all(updatedModelsWithHumanMessage.map(async (model) => {
       if (modelsToUpdate.some(m => m.value === model.value)) {
         const formattedMessages = model.messages.map(msg => ({
@@ -60,27 +62,38 @@ export const sendMessage = async (modelToUpdate, message, selectedModels, update
           content: msg.text
         }));
 
-        const response = await axios.post(`${API_URL}/chat`, {
-          messages: formattedMessages,
-          model: model.value
-        });
+        try {
+          const response = await axios.post(`${API_URL}/chat`, {
+            messages: formattedMessages,
+            model: model.value
+          });
 
-        const aiResponse = response.data.response;
+          const aiResponse = response.data.response;
 
-        return {
-          ...model,
-          messages: [
-            ...model.messages,
-            { text: aiResponse, sender: 'ai' }
-          ]
-        };
+          return {
+            ...model,
+            messages: [
+              ...model.messages,
+              { text: aiResponse, sender: 'ai' }
+            ]
+          };
+        } catch (error) {
+          console.error(`Error getting response for model ${model.value}:`, error);
+          return {
+            ...model,
+            messages: [
+              ...model.messages,
+              { text: 'Error: Unable to get response from the server.', sender: 'ai' }
+            ]
+          };
+        }
       }
       return model;
     }));
 
     updateModels(finalUpdatedModels);
   } catch (error) {
-    console.error('Error sending message:', error);
+    console.error('Error in sendMessage:', error);
     // Handle error (e.g., show an error message to the user)
   }
 };
