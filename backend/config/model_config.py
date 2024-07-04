@@ -17,6 +17,8 @@ class ModelConfig:
         key = os.getenv(self.api_key_env)
         if not key and self.provider.lower() == 'google':
             key = os.getenv('GOOGLE_API_KEY')  # Fallback to GOOGLE_API_KEY
+        if not key and self.provider.lower() == 'google':
+            raise ValueError(f"Google API key not found. Please set the {self.api_key_env} or GOOGLE_API_KEY environment variable.")
         return key
 
 AVAILABLE_MODELS: List[ModelConfig] = [
