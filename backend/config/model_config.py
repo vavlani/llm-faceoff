@@ -14,7 +14,10 @@ class ModelConfig:
 
     @property
     def api_key(self) -> Optional[str]:
-        return os.getenv(self.api_key_env)
+        key = os.getenv(self.api_key_env)
+        if not key and self.provider.lower() == 'google':
+            key = os.getenv('GOOGLE_API_KEY')  # Fallback to GOOGLE_API_KEY
+        return key
 
 AVAILABLE_MODELS: List[ModelConfig] = [
     ModelConfig(
