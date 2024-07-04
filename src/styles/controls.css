@@ -55,3 +55,8 @@
   min-width: 20px;
   text-align: center;
 }
+
+.copy-button,
+.send-individual-button {
+  color: white;
+}
