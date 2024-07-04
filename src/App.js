@@ -59,7 +59,8 @@ const App = () => {
   const [selectedModels, setSelectedModels] = useState(
     allModels.slice(0, 2).map(model => ({
       ...model,
-      messages: [{ text: model.initialMessage, sender: 'ai' }],
+      // messages: [{ text: model.initialMessage, sender: 'ai' }],
+      messages: [],
       webAccess: false
     }))
   );
@@ -83,8 +84,7 @@ const App = () => {
         ...model,
         messages: [
           ...model.messages,
-          { text: commonInput, sender: 'user' },
-          { text: `You said: ${commonInput}`, sender: 'ai' }
+          { text: commonInput, sender: 'human' }        
         ]
       }));
       updateModels(updatedModels);
@@ -99,7 +99,8 @@ const App = () => {
       if (newModel) {
         setSelectedModels([...selectedModels, {
           ...newModel,
-          messages: [{ text: newModel.initialMessage, sender: 'ai' }],
+          // messages: [{ text: newModel.initialMessage, sender: 'ai' }],
+          messages: [],
           webAccess: false
         }]);
       }
