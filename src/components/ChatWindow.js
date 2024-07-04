@@ -77,7 +77,7 @@ const ChatWindow = ({ model, availableModels, messages, onRemove, webAccess, tog
           }}
         />
         <div className="header-controls">
-          <label className="web-access-toggle">
+          {/* <label className="web-access-toggle">
             <input
               type="checkbox"
               checked={webAccess}
@@ -85,7 +85,7 @@ const ChatWindow = ({ model, availableModels, messages, onRemove, webAccess, tog
             />
             <span className="slider"></span>
           </label>
-          <span className="web-access-label">Web Access</span>
+          <span className="web-access-label">Web Access</span> */}
           <button onClick={onRemove} className="remove-btn">×</button>
           <button className="subheader-toggle" onClick={() => setIsSubheaderOpen(!isSubheaderOpen)}>
             {isSubheaderOpen ? <FaChevronUp /> : <FaChevronDown />}
