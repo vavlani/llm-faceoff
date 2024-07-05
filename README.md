@@ -1,6 +1,6 @@
 # llm-faceoff
 
-![LLM Faceoff Demo](llm-faceoff-demo.gif)
+![LLM Faceoff Demo](ezgif-4-303f5e9603.gif)
 
 llm-faceoff is a web application that allows users to interact with multiple AI models simultaneously. It provides a flexible and customizable interface for testing and comparing different language models. The application consists of a React frontend and a Flask backend.
 
