@@ -1,6 +1,6 @@
-# Chat Playground
+# llm-faceoff
 
-Chat Playground is a web application that allows users to interact with multiple AI models simultaneously. It provides a flexible and customizable interface for testing and comparing different language models. The application consists of a React frontend and a Flask backend.
+llm-faceoff is a web application that allows users to interact with multiple AI models simultaneously. It provides a flexible and customizable interface for testing and comparing different language models. The application consists of a React frontend and a Flask backend.
 
 ## Features
 
@@ -28,12 +28,12 @@ The project is structured as follows:
 
 ## How to Run
 
-To run the Chat Playground application, follow these steps:
+To run the llm-faceoff application, follow these steps:
 
 1. Clone the repository:
    ```
-   git clone https://github.com/your-username/chat-playground.git
-   cd chat-playground
+   git clone https://github.com/your-username/llm-faceoff.git
+   cd llm-faceoff
    ```
 
 2. Install frontend dependencies:
